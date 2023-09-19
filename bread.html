@@ -1,103 +1,102 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset='utf-8' />
-    <title>3D Map with Mapbox GL JS</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet' />
+    <title>Croatia Interactive Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
-        body { margin: 0; padding: 0; }
-        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+        #map { height: 100vh; width: 100vw; }
         #categorySelect {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 1000; 
-        }
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000; /* This ensures the dropdown is above the map */
+}
     </style>
 </head>
 <body>
-    <div id='map'></div>
+    <div id="map"></div>
     <select id="categorySelect">
         <option value="">All Categories</option>
         <option value="Sensory">Sensory</option>
+        <option value="Bread">Bread</option>
         <option value="Shit">Shit</option>
         <option value="Lost">Lost</option>
+        <!-- Add more categories as needed -->
     </select>
 
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZXNlY2dpbiIsImEiOiJjbG1xN2QzZHIwMHI0Mm1ycmNrNHljNmg1In0.gF3sHFprijBxtEkMQA6_qw';
-    var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [15.2, 45.1], // starting position
-        zoom: 7, // starting zoom
-        pitch: 60, // pitch in degrees
-        bearing: -60, // bearing in degrees
-        antialias: true // create the gl context with MSAA antialiasing, so custom layers are antialiased
-    });
+        var map = L.map('map').setView([45.1, 15.2], 7); // Coordinates for the center of Croatia
 
-    var locations = [
-        {
-            name: "Zagreb",
-            lat: 45.8150,
-            lon: 15.9819,
-            year: "2023",
-            categories: ["Shit", "Lost"],
-            images: ["images/zagreb1.jpg", "images/zagreb2.jpg"],
-            description: "Zagreb is the capital and the largest city of Croatia."
-        },
-        {
-            name: "Dubrovnik Project",
-            lat: 42.6507,
-            lon: 18.0944,
-            year: "2023",
-            categories: ["Shit", "Sensory"],
-            images: ["dubrovnik1.jpg", "dubrovnik2.jpg"],
-            description: "This lecture sucks"
-        },
-        // More locations here...
-    ];
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
 
-    var markers = []; // Array to store the markers
+        var locations = [
+            {
+                name: "Zagreb",
+                lat: 45.8150,
+                lon: 15.9819,
+                year: "2023",
+                categories: ["Shit", "Lost"],
+                images: ["images/zagreb1.jpg", "images/zagreb2.jpg"],
+                description: "Zagreb is the capital and the largest city of Croatia."
+            },
+            {
+                name: "Dubrovnik Project",
+                lat: 42.6507,
+                lon: 18.0944,
+                year: "2023",
+                categories: ["Shit", "Sensory"],
+                images: ["dubrovnik1.jpg", "dubrovnik2.jpg"],
+                description: "This lecture sucks"
+            },
+            // More locations here...
+        ];
 
-    function addMarkers(category) {
-        // First, remove all markers
-        markers.forEach(function(marker) {
-            marker.remove();
-        });
-        markers = [];
+        var markers = []; // Array to store the markers
 
-        // Then, add only the markers that match the selected category
-        locations.forEach(function(location) {
-            if (!category || location.categories.includes(category)) {
-                var popup = new mapboxgl.Popup({ offset: 25 })
-                .setHTML("<h3>" + location.name + "</h3>"
-                            +"<img src='" + location.images[0] + "' alt='" + location.name + "' style='width: 200px; height: auto;'>"
-                            +"<p>" + location.description + "</p>"
-                            +"<p>Year: " + location.year + "</p>"
-                            +"<p>Categories: " + location.categories.join(', ') + "</p>");
+        function addMarkers(category) {
+            // First, remove all markers
+            markers.forEach(function(marker) {
+                map.removeLayer(marker);
+            });
 
-                var marker = new mapboxgl.Marker()
-                .setLngLat([location.lon, location.lat])
-                .setPopup(popup)
-                .addTo(map);
+            // Then, add only the markers that match the selected category
+            locations.forEach(function(location) {
+                if (!category || location.categories.includes(category)) {
+                    var marker = L.marker([location.lat, location.lon]).addTo(map);
 
-                markers.push(marker); // Add the marker to the array
-            }
-        });
-    }
+                    marker.bindTooltip(location.name, {
+                        permanent: false,
+                        direction: 'top'
+                    });
 
-    // Call the function initially with no category selected
-    map.on('load', function() {
+                    var popupContent = "<h3>" + location.name + "</h3>";
+                    popupContent += "<img src='" + location.images[0] + "' alt='" + location.name + "' style='width: 200px; height: auto;'>";
+                    popupContent += "<p>" + location.description + "</p>";
+                    popupContent += "<p>Year: " + location.year + "</p>";
+                    popupContent += "<p>Categories: " + location.categories.join(', ') + "</p>";
+
+                    marker.bindPopup(popupContent);
+
+                    marker.on('click', function(e) {
+                        marker.openPopup();
+                    });
+
+                    markers.push(marker); // Add the marker to the array
+                }
+            });
+        }
+
+        // Call the function initially with no category selected
         addMarkers();
-    });
 
-    // Update the map when the selected category changes
-    document.getElementById('categorySelect').addEventListener('change', function() {
-        addMarkers(this.value);
-    });
+        // Update the map when the selected category changes
+        document.getElementById('categorySelect').addEventListener('change', function() {
+            addMarkers(this.value);
+        });
     </script>
 </body>
 </html>
