@@ -4,27 +4,41 @@
     <meta charset='utf-8' />
     <title>3D Map with Mapbox GL JS</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet' />
-    <style>
-        body { margin: 0; padding: 0; }
-        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
-        #categorySelect {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 1000; 
-        }
-    </style>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css' rel='stylesheet' />
+    <link href='styles.css' rel='stylesheet' />
+</head>
+<body>
 </head>
 <body>
     <div id='map'></div>
-    <select id="categorySelect">
-        <option value="">All Categories</option>
-        <option value="Sensory">Sensory</option>
-        <option value="Shit">Shit</option>
-        <option value="Lost">Lost</option>
-    </select>
+
+    <div id="categoryFilters">
+        <button id="allCategoriesButton" onclick="addMarkers()">All Categories</button>
+        <label for="senseSelect">Sense:</label>
+        <select id="senseSelect" multiple>
+            <option value="Visual">Visual</option>
+            <option value="Auditive">Auditive</option>
+            <option value="Smell">Smell</option>
+            <option value="Touch">Touch</option>
+            <option value="Taste">Taste</option>
+        </select>
+
+        <label for="spaceSelect">Space:</label>
+        <select id="spaceSelect" multiple>
+            <option value="Abandoned Building">Abandoned Building</option>
+            <option value="Seaside">Seaside</option>
+            <option value="Under Water">Under Water</option>
+            <option value="Inner Land">Inner Land</option>
+        </select>
+
+        <label for="typeSelect">Type:</label>
+        <select id="typeSelect" multiple>
+            <option value="Installation">Installation</option>
+            <option value="Performance">Performance</option>
+            <option value="Interactive">Interactive</option>
+        </select>
+    </div>
 
     <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiZXNlY2dpbiIsImEiOiJjbG1xN2QzZHIwMHI0Mm1ycmNrNHljNmg1In0.gF3sHFprijBxtEkMQA6_qw';
@@ -39,65 +53,79 @@
     });
 
     var locations = [
-        {
-            name: "Zagreb",
-            lat: 45.8150,
-            lon: 15.9819,
-            year: "2023",
-            categories: ["Shit", "Lost"],
-            images: ["images/zagreb1.jpg", "images/zagreb2.jpg"],
-            description: "Zagreb is the capital and the largest city of Croatia."
-        },
-        {
-            name: "Dubrovnik Project",
-            lat: 42.6507,
-            lon: 18.0944,
-            year: "2023",
-            categories: ["Shit", "Sensory"],
-            images: ["dubrovnik1.jpg", "dubrovnik2.jpg"],
-            description: "This lecture sucks"
-        },
-        // More locations here...
-    ];
+    {
+        name: "Zagreb",
+        lat: 45.8150,
+        lon: 15.9819,
+        year: "2023",
+        senses: ["Visual", "Smell"],
+        spaces: ["Abandoned Building", "Seaside"],
+        types: ["Installation", "Performance"],
+        images: ["images/zagreb1.jpg", "images/zagreb2.jpg"],
+        description: "Zagreb is the capital and the largest city of Croatia."
+    },
+    {
+        name: "Dubrovnik Project",
+        lat: 42.6507,
+        lon: 18.0944,
+        year: "2023",
+        senses: ["Auditive", "Touch"],
+        spaces: ["Under Water", "Inner Land"],
+        types: ["Interactive"],
+        images: ["dubrovnik1.jpg", "dubrovnik2.jpg"],
+        description: "This lecture sucks"
+    },
+    // More locations here...
+];
 
     var markers = []; // Array to store the markers
 
-    function addMarkers(category) {
-        // First, remove all markers
-        markers.forEach(function(marker) {
-            marker.remove();
-        });
-        markers = [];
+// Only keep this addMarkers function and remove the other
+function addMarkers(category) {
 
-        // Then, add only the markers that match the selected category
-        locations.forEach(function(location) {
-            if (!category || location.categories.includes(category)) {
-                var popup = new mapboxgl.Popup({ offset: 25 })
+    // Get the selected options from the select elements
+    var senses = Array.from(document.getElementById('senseSelect').selectedOptions).map(option => option.value);
+    var spaces = Array.from(document.getElementById('spaceSelect').selectedOptions).map(option => option.value);
+    var types = Array.from(document.getElementById('typeSelect').selectedOptions).map(option => option.value);
+
+    // First, remove all markers
+    markers.forEach(function(marker) {
+        marker.remove();
+    });
+    markers = [];
+
+    // Then, add only the markers that match the selected categories
+    locations.forEach(function(location) {
+        if ((!senses.length || location.senses.some(sense => senses.includes(sense))) 
+            && (!spaces.length || location.spaces.some(space => spaces.includes(space)))
+            && (!types.length || location.types.some(type => types.includes(type)))) {
+            
+            var popup = new mapboxgl.Popup({ offset: 25 })
                 .setHTML("<h3>" + location.name + "</h3>"
                             +"<img src='" + location.images[0] + "' alt='" + location.name + "' style='width: 200px; height: auto;'>"
                             +"<p>" + location.description + "</p>"
                             +"<p>Year: " + location.year + "</p>"
                             +"<p>Categories: " + location.categories.join(', ') + "</p>");
 
-                var marker = new mapboxgl.Marker()
+            var marker = new mapboxgl.Marker()
                 .setLngLat([location.lon, location.lat])
                 .setPopup(popup)
                 .addTo(map);
 
-                markers.push(marker); // Add the marker to the array
-            }
-        });
-    }
-
-    // Call the function initially with no category selected
-    map.on('load', function() {
-        addMarkers();
+            markers.push(marker); // Add the marker to the array
+        }
     });
+}
 
-    // Update the map when the selected category changes
-    document.getElementById('categorySelect').addEventListener('change', function() {
-        addMarkers(this.value);
-    });
+// Call the function initially with no category selected
+map.on('load', function() {
+    addMarkers();
+});
+
+// Update the map when the selected categories change
+document.getElementById('senseSelect').addEventListener('change', addMarkers);
+document.getElementById('spaceSelect').addEventListener('change', addMarkers);
+document.getElementById('typeSelect').addEventListener('change', addMarkers);
     </script>
 </body>
 </html>
