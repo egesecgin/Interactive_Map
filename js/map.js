@@ -46,7 +46,7 @@ function filterProjects(type){
 }
 
 function filterProjectsBySense(sense){
-  if(type === 'reset') {
+  if(sense === 'reset') {
     filteredProjectList = ProjectList;
   } else {
     if (currentMarkers!==null) {
@@ -54,8 +54,8 @@ function filterProjectsBySense(sense){
         currentMarkers[i].remove();
       }
     }
-
-    filteredProjectList = ProjectList.filter(x => x.senses.contains(sense));
+    filteredProjectList = ProjectList.filter(x => x.senses.includes(sense));
+    console.log(filteredProjectList);
   }
   updateLocationList();
   updateMarkers();
@@ -174,11 +174,18 @@ function openDialog(projects){
 
 function populateDetails(project) {
 
+  const senses = [];
+
+  for (let sense of project.senses) {
+    senses.push(`<div>${sense}</div>`);
+  }
+
   const details = `
       <div>
         <div>Name: ${project.name}</span>
         <div>Type: ${project.type}</div>
         <div>ID: ${project.id}</div>
+        ${senses.join("")}
       </div>
     `;
   return details;
