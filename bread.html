@@ -4,8 +4,8 @@
     <meta charset='utf-8' />
     <title>3D Map with Mapbox GL JS</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v3.0.0-beta.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.0-beta.1/mapbox-gl.css' rel='stylesheet' />
     <link href='styles.css' rel='stylesheet' />
 </head>
 <body>
@@ -41,10 +41,10 @@
     </div>
 
     <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZXNlY2dpbiIsImEiOiJjbG1xN2QzZHIwMHI0Mm1ycmNrNHljNmg1In0.gF3sHFprijBxtEkMQA6_qw';
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZXNlY2dpbiIsImEiOiJjbG1yajdiMG8wOGg3MnFydDAwaDNsaDk4In0.mwOTED4hBq4RBxEk0NbFXA';
     var map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
+        style: 'mapbox://styles/mapbox/standard-beta',
         center: [15.2, 45.1], // starting position
         zoom: 7, // starting zoom
         pitch: 60, // pitch in degrees
@@ -82,6 +82,9 @@
 
 // Only keep this addMarkers function and remove the other
 function addMarkers(category) {
+
+
+
 
     // Get the selected options from the select elements
     var senses = Array.from(document.getElementById('senseSelect').selectedOptions).map(option => option.value);
@@ -127,5 +130,6 @@ document.getElementById('senseSelect').addEventListener('change', addMarkers);
 document.getElementById('spaceSelect').addEventListener('change', addMarkers);
 document.getElementById('typeSelect').addEventListener('change', addMarkers);
     </script>
+    
 </body>
 </html>
