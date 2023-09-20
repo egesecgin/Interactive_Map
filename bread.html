@@ -9,8 +9,6 @@
     <link href='styles.css' rel='stylesheet' />
 </head>
 <body>
-</head>
-<body>
     <div id='map'></div>
 
     <div id="categoryFilters">
@@ -75,55 +73,46 @@
         images: ["dubrovnik1.jpg", "dubrovnik2.jpg"],
         description: "This lecture sucks"
     },
-    // More locations here...
-];
+    ];
 
-    var markers = []; // Array to store the markers
+    var markers = [];
 
-// Only keep this addMarkers function and remove the other
-function addMarkers(category) {
+    function addMarkers() {
+        var senses = Array.from(document.getElementById('senseSelect').selectedOptions).map(option => option.value);
+        var spaces = Array.from(document.getElementById('spaceSelect').selectedOptions).map(option => option.value);
+        var types = Array.from(document.getElementById('typeSelect').selectedOptions).map(option => option.value);
 
+        markers.forEach(function(marker) {
+            marker.remove();
+        });
+        markers = [];
 
+        locations.forEach(function(location) {
+            if ((!senses.length || location.senses.some(sense => senses.includes(sense))) 
+                && (!spaces.length || location.spaces.some(space => spaces.includes(space)))
+                && (!types.length || location.types.some(type => types.includes(type)))) {
 
+                var popup = new mapboxgl.Popup({ offset: 25 })
+                    .setHTML("<h3>" + location.name + "</h3>"
+                                +"<img src='" + location.images[0] + "' alt='" + location.name + "' style='width: 200px; height: auto;'>"
+                                +"<p>" + location.description + "</p>"
+                                +"<p>Year: " + location.year + "</p>"
+                                +"<p>Senses: " + location.senses.join(', ') + "</p>"
+                                +"<p>Spaces: " + location.spaces.join(', ') + "</p>"
+                                +"<p>Types: " + location.types.join(', ') + "</p>");
 
-    // Get the selected options from the select elements
-    var senses = Array.from(document.getElementById('senseSelect').selectedOptions).map(option => option.value);
-    var spaces = Array.from(document.getElementById('spaceSelect').selectedOptions).map(option => option.value);
-    var types = Array.from(document.getElementById('typeSelect').selectedOptions).map(option => option.value);
+                var marker = new mapboxgl.Marker()
+                    .setLngLat([location.lon, location.lat])
+                    .setPopup(popup)
+                    .addTo(map);
 
-    // First, remove all markers
-    markers.forEach(function(marker) {
-        marker.remove();
-    });
-    markers = [];
-
-    // Then, add only the markers that match the selected categories
-    locations.forEach(function(location) {
-        if ((!senses.length || location.senses.some(sense => senses.includes(sense))) 
-            && (!spaces.length || location.spaces.some(space => spaces.includes(space)))
-            && (!types.length || location.types.some(type => types.includes(type)))) {
-            
-            var popup = new mapboxgl.Popup({ offset: 25 })
-                .setHTML("<h3>" + location.name + "</h3>"
-                            +"<img src='" + location.images[0] + "' alt='" + location.name + "' style='width: 200px; height: auto;'>"
-                            +"<p>" + location.description + "</p>"
-                            +"<p>Year: " + location.year + "</p>"
-                            +"<p>Categories: " + location.categories.join(', ') + "</p>");
-
-            var marker = new mapboxgl.Marker()
-                .setLngLat([location.lon, location.lat])
-                .setPopup(popup)
-                .addTo(map);
-
-            markers.push(marker); // Add the marker to the array
-        }
-    });
-}
-
-// Call the function initially with no category selected
-map.on('load', function() {
+                markers.push(marker);
+            }
+        });
+    }
+window.onload = function() {
     addMarkers();
-});
+};
 
 // Update the map when the selected categories change
 document.getElementById('senseSelect').addEventListener('change', addMarkers);
