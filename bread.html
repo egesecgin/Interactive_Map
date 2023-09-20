@@ -25,12 +25,17 @@
 
 
     <div class="category-select">
-        <button>Performance</button>
-        <button>Installation</button>
+        <button onclick="filterProjects('installation')">Installation</button>
+        <button onclick="filterProjects('performance')">Performance</button>
+        <button onclick="filterProjects('reset')">All</button>
     </div>
 
 
-    <div class="sense-select">
+
+
+    <div class="project-overview">
+        <h1>PROJECT OVERVIEW</h1>
+        <div id="project-overview"></div>
     </div>
 
     
