@@ -83,10 +83,11 @@ function getProject(slug) {
 
 //Get matching projects by providing area coordinates
 function getProjects(coord1, coord2) {
-  if (filteredProjectList.filter((x) => x.longtitude === coord1).length == 0) {
+
+  if (filteredProjectList.filter((x) => x.longitude === coord1).length === 0) {
     return null;
   } else {
-    return filteredProjectList.filter((x) => x.longtitude === coord1 && filteredProjectList.filter((x) => x.lattitude === coord2));
+    return filteredProjectList.filter((x) => x.longitude === coord1 && x.latitude === coord2);
   }
 
 }
@@ -135,40 +136,10 @@ function updateLocationList() {
           coordinates: [13.8078657, 44.8837266],
         },
         properties: {
-          projects: [getProjects(13.8078657, 44.8837266), getProject("cocoon")],
+          projects: [getProjects(13.8078657, 44.8837266)],
           description: "this is an area",
         },
-      },
-      {
-        type: "Location",
-        geometry: {
-          type: "Point",
-          coordinates: [13.812157, 44.891861],
-        },
-        properties: {
-          projects: [getProject("the-essence-of-casa-matta")],
-        },
-      },
-      {
-        type: "Location",
-        geometry: {
-          type: "Point",
-          coordinates: [13.809157, 44.894861],
-        },
-        properties: {
-          projects: [getProject("lithic-technology"), getProject("layerz")],
-        },
-      },
-      {
-        type: "Location",
-        geometry: {
-          type: "Point",
-          coordinates: [13.802157, 44.891861],
-        },
-        properties: {
-          projects: [getProject("project-soba"), getProject("exosensor")],
-        },
-      },
+      }
     ],
   };
 }
@@ -177,30 +148,44 @@ function updateMarkers() {
 
   for (const area of locationList.areas) {
 
+
     // create a HTML element for each feature
     const el = document.createElement("div");
-
 
     if (area.properties.projects.some((el) => el !== null)) {
       el.projects = area;
       el.className = "marker";
 
       let index = 0;
+      let projectList = area.properties.projects[0]
 
-      for(project of area.properties.projects) {
 
-        if(project !== null) {
-          index++;
-        }
+      for(project of projectList) {
+
+
+        index++;
+
 
         switch(index){
+          
           case 1: {
             el.classList.add('marker-1');
             break;
           } 
           case 2: {
             el.classList.add('marker-2');
-            console.log(project);
+            break;
+          }
+          case 3: {
+            el.classList.add('marker-3');
+            break;
+          }
+          case 4: {
+            el.classList.add('marker-4');
+            break;
+          }
+          case 5: {
+            el.classList.add('marker-5');
             break;
           }
           default: {
@@ -209,7 +194,7 @@ function updateMarkers() {
   
         }
       }
-      el.addEventListener("click", () => openDialog(el.projects));
+      el.addEventListener("click", () => openDialog(projectList, area.geometry.coordinates));
 
       // make a marker for each feature and add to the map
       newMarker = new mapboxgl.Marker(el)
@@ -225,21 +210,20 @@ function updateMarkers() {
   }
 }
 
-function openDialog(projects) {
+function openDialog(projects, coordinates) {
+  console.log(projects);
     map.flyTo({
-    center: [projects.geometry.coordinates[0], projects.geometry.coordinates[1]],
+    center: [coordinates[0], coordinates[1]],
     essential: true // this animation is considered essential with respect to prefers-reduced-motion
     });
 
 
-  let areaProjectList = projects.properties.projects;
-
   const el = document.getElementById("project-overview");
 
-  for (project of areaProjectList) {
+  for (project of projects) {
     if (project !== null) {
       const item = document.createElement("li");
-      item.innerHTML = populateDetails(project[0]);
+      item.innerHTML = populateDetails(project);
       el.appendChild(item);
     }
   }

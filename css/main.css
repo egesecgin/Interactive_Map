@@ -72,6 +72,18 @@ body {
   background-image: url("../assets/marker-2.svg");
 }
 
+.marker-3 {
+  background-image: url("../assets/marker-3.svg");
+}
+
+.marker-4 {
+  background-image: url("../assets/marker-4.svg");
+}
+
+.marker-5 {
+  background-image: url("../assets/marker-5.svg");
+}
+
 
 .marker-animation {
   position: absolute;
