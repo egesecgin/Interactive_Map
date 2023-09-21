@@ -1,52 +1,83 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset='utf-8' />
+  <head>
+    <meta charset="utf-8" />
     <title>3D Map with Mapbox GL JS</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.mapbox.com/mapbox-gl-js/v3.0.0-beta.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.0-beta.1/mapbox-gl.css' rel='stylesheet' />
-    <link href='./css/main.css' rel='stylesheet' />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.0-beta.1/mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v3.0.0-beta.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link href="./css/main.css" rel="stylesheet" />
+    <link href="./css/loading.css" rel="stylesheet" />
     <style>
-        body { margin: 0; padding: 0; }
-        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
-        #categorySelect {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 1000; 
-        }
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+      #categorySelect {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1000;
+      }
     </style>
-</head>
-<body>
-    
+  </head>
+  <body>
+    <div id="loading-wrapper">
+      <div class="boxes">
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
 
-    <div id='map'></div>
-
+    <div id="map"></div>
 
     <div class="category-select">
-        <button onclick="filterProjects('installation')">Installation</button>
-        <button onclick="filterProjects('performance')">Performance</button>
-        <button onclick="filterProjects('reset')">All</button>
+      <button onclick="filterProjects('installation')">Installation</button>
+      <button onclick="filterProjects('performance')">Performance</button>
+      <button onclick="filterProjects('reset')">All</button>
 
-        <button onclick="filterProjectsBySense('haptic')">Haptic</button>
-        <button onclick="filterProjectsBySense('visual')">Visual</button>
+      <button onclick="filterProjectsBySense('haptic')">Haptic</button>
+      <button onclick="filterProjectsBySense('visual')">Visual</button>
     </div>
-
-
-
 
     <div class="project-overview">
-        <h1>PROJECT OVERVIEW</h1>
-        <div id="project-overview"></div>
+      <h1>PROJECT OVERVIEW</h1>
+      <div id="project-overview"></div>
     </div>
-
-    
-
-</body>
-<script src='./js/map.js'></script>
+  </body>
+  <script src="./js/map.js"></script>
 </html>
-
-
-
-
