@@ -1,52 +1,198 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset='utf-8' />
+  <head>
+    <meta charset="utf-8" />
     <title>3D Map with Mapbox GL JS</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.mapbox.com/mapbox-gl-js/v3.0.0-beta.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.0-beta.1/mapbox-gl.css' rel='stylesheet' />
-    <link href='./css/main.css' rel='stylesheet' />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.0-beta.1/mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v3.0.0-beta.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link href="./css/main.css" rel="stylesheet" />
     <style>
-        body { margin: 0; padding: 0; }
-        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
-        #categorySelect {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 1000; 
-        }
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+      #categorySelect {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1000;
+      }
     </style>
-</head>
-<body>
-    
-
-    <div id='map'></div>
-
+  </head>
+  <body>
+    <div id="map"></div>
 
     <div class="category-select">
-        <button onclick="filterProjects('installation')">Installation</button>
-        <button onclick="filterProjects('performance')">Performance</button>
-        <button onclick="filterProjects('reset')">All</button>
+      <button onclick="filterProjects('installation')">Installation</button>
+      <button onclick="filterProjects('performance')">Performance</button>
+      <button onclick="filterProjects('reset')">All</button>
 
-        <button onclick="filterProjectsBySense('haptic')">Haptic</button>
-        <button onclick="filterProjectsBySense('visual')">Visual</button>
+      <button onclick="filterProjectsBySense('haptic')">Haptic</button>
+      <button onclick="filterProjectsBySense('visual')">Visual</button>
     </div>
-
-
-
 
     <div class="project-overview">
-        <h1>PROJECT OVERVIEW</h1>
-        <div id="project-overview"></div>
+      <!-- <button>X</button> -->
+
+      <div class="project-overview_top">
+        <div class="project-overview_topleft">
+          <img
+            style="width: 48px; height: 48px"
+            src="assets/info-icon.svg"
+            frameborder="0"
+          ></img>
+
+          <div class="area-information">
+            <h2>Area Information</h2>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error
+              soluta architecto corporis eligendi maiores amet maxime quod id
+              voluptas ipsum?
+            </p>
+          </div>
+        </div>
+        
+        <div class="project-overview_topleft">
+          <img
+            style="width: 48px; height: 48px"
+            src="assets/historical-icon.svg"
+            frameborder="0"
+          ></img>
+          <div class="historical-aspect">
+            <h2>Historical Aspect</h2>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error
+              soluta architecto corporis eligendi maiores amet maxime quod id
+              voluptas ipsum?
+            </p>
+          </div>
+        </div>
+         
+        <button class="exit-button">
+          <iframe src="assets/exit-button.svg" frameborder="0"></iframe>
+        </button>
+        </div>
+
+       
+
+      <div class="project-overview_bottom">
+        <div class="project-description">
+          <h2>Project Crab</h2>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error
+            soluta architecto corporis eligendi maiores amet maxime quod id
+            voluptas ipsum?
+          </p>
+        </div>
+        <div class="project-description">
+          <h2>Project Crab</h2>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error
+            soluta architecto corporis eligendi maiores amet maxime quod id
+            voluptas ipsum?
+          </p>
+        </div>
+      </div>
+      <div id="project-overview"></div>
     </div>
-
-    
-
-</body>
-<script src='./js/map.js'></script>
+  </body>
+  <script src="./js/map.js"></script>
 </html>
 
+<style>
+  .project-overview {
+    position: fixed;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    top: 10vh;
+    left: 15vw;
+    z-index: 1000;
+    background-color: white;
+    /* gap: 20px; */
+    width: 70vw;
+    height: 80vh;
+    padding: 50px;
+    border-radius: 50px;
+    background: #ffffff;
+  }
 
+  .project-overview_top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 30%;
+    gap: 50px;
+  }
 
+  .project-overview_topleft {
+    display: flex;
+    flex-direction: row;
+  }
 
+  .project-overview_topright {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .area-information {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 10px;
+  }
+
+  .historical-aspect {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+  }
+
+  .exit-button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    width: 74px;
+    height: 74px;
+  }
+
+  .project-overview_bottom {
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+    height: 70%;
+    gap: 20px;
+  }
+
+  .project-description {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: white;
+    box-sizing: border-box;
+    width: 100%;
+
+    padding: 20px;
+    background-image: url("dubrovnik1.jpg");
+    border-radius: 50px;
+  }
+</style>
