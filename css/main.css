@@ -1,68 +1,118 @@
+body {
+  font-family: "Merriweather";
+}
+
+.category-container {
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 10em;
+}
+
+
+
 .category-select {
-    position: fixed;
-    top: 20vh;
-    left: 5em;
-    height: 28vh;
-    width: 8em;
-    background-color: rgb(255, 255, 255);
-    border-radius: 100px;
-    margin: 0 auto 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  position: fixed;
+  bottom: 5em;
+  height: 5em;
+  width: 60em;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  background-color: rgb(255, 255, 255);
+  border-radius: 100px;
 }
 
 .sense-select {
-    position: fixed;
-    bottom: 20vh;
-    left: 5em;
-    height: 28vh;
-    width: 8em;
-    background-color: rgb(255, 255, 255);
-    border-radius: 100px;
-    margin: 0 auto 0 auto;
+  position: fixed;
+  bottom: 20vh;
+  left: 5em;
+  height: 28vh;
+  width: 8em;
+  background-color: rgb(255, 255, 255);
+  border-radius: 100px;
+  margin: 0 auto 0 auto;
 }
 
-
 .project-overview {
-    position: fixed;
-    bottom: 20vh;
-    left: 5em;
-    height: 28vh;
-    width: 8em;
-    background-color: rgb(255, 255, 255);
-    border-radius: 100px;
-    margin: 0 auto 0 auto;
+  position: fixed;
+  bottom: 20vh;
+  left: 5em;
+  height: 28vh;
+  width: 8em;
+  background-color: rgb(255, 255, 255);
+  border-radius: 100px;
+  margin: 0 auto 0 auto;
 }
 
 .marker {
-    background-image: url('../assets/marker.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 120px;
-    height: 100px;
-    cursor: pointer;
-    animation: slide-up 0.5s ease;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 120px;
+  height: 100px;
+  cursor: pointer;
+  animation: slide-up 0.5s ease;
+  position: absolute;
 }
 
+.marker-1 {
+  background-image: url("../assets/marker-1.svg");
+}
+
+.marker-2 {
+  background-image: url("../assets/marker-2.svg");
+}
+
+
 .marker-animation {
-    animation: slide-up 0.5s ease;
+  position: absolute;
+  animation: pop 0.5s ease;
+}
+
+.marker.removing {
+  -webkit-animation: fadeOut 500ms;
+  -moz-animation: fadeOut 500ms;
+  animation: fadeOut 200ms;
 }
 
 @keyframes slide-up {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes pop {
-    0% {
-        transform: scale(0);
-    }
-    50% {
-        transform: scale(1.3);
-    }
-    100% {
-        transform: scale(1);
-    }
+  0% {
+    width: 20px;
+    height: 16.666px;
+  }
+  50% {
+    width: 200px;
+    height: 166.666px;
+  }
+  100% {
+    width: 120px;
+    height: 100px;
+  }
 }
