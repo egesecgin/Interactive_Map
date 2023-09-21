@@ -210,6 +210,14 @@ function updateMarkers() {
 }
 
 function openDialog(projects) {
+
+    console.log(projects);
+    map.flyTo({
+    center: [projects.geometry.coordinates[0], projects.geometry.coordinates[1]],
+    essential: true // this animation is considered essential with respect to prefers-reduced-motion
+    });
+
+
   let areaProjectList = projects.properties.projects;
 
   const el = document.getElementById("project-overview");
@@ -246,10 +254,11 @@ function populateDetails(project) {
 const map = new mapboxgl.Map({
   container: "map", // container ID
   style: "mapbox://styles/mapbox/standard-beta", // style URL
-  center: [13.806243, 44.884439], // starting position [lng, lat]
+  center: [13.805493, 44.899077], // starting position [lng, lat]
   zoom: 17, // starting zoom
   maxBounds: bounds,
-  pitch: 60,
+  pitch: 65,
+  bearing: 160
 });
 
   map.addControl(new mapboxgl.NavigationControl());
@@ -261,7 +270,7 @@ const map = new mapboxgl.Map({
     map.setConfigProperty(
       "basemap",
       "lightPreset",
-      "dawn",
+      "dusk",
       "showPointOfInterestLabels",
       false,
       "showPlaceLabels",

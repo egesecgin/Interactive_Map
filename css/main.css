@@ -1,12 +1,35 @@
-.category-select {
+body {
+  font-family: "Merriweather";
+}
+
+.category-container {
   position: fixed;
-  top: 20vh;
-  left: 5em;
-  height: 28vh;
-  width: 8em;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 10em;
+}
+
+
+
+.category-select {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  position: fixed;
+  bottom: 5em;
+  height: 5em;
+  width: 60em;
+
+  margin-left: auto;
+  margin-right: auto;
+
   background-color: rgb(255, 255, 255);
   border-radius: 100px;
-  margin: 0 auto 0 auto;
 }
 
 .sense-select {

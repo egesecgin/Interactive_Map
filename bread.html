@@ -12,8 +12,10 @@
       href="https://api.mapbox.com/mapbox-gl-js/v3.0.0-beta.1/mapbox-gl.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather">
     <link href="./css/main.css" rel="stylesheet" />
     <link href="./css/loading.css" rel="stylesheet" />
+    <link href="./css/tabs.css" rel="stylesheet" />
     <style>
       body {
         margin: 0;
@@ -44,13 +46,30 @@
 
     <div id="map"></div>
 
-    <div class="category-select">
-      <button onclick="filterProjects('installation')">Installation</button>
-      <button onclick="filterProjects('performance')">Performance</button>
-      <button onclick="filterProjects('reset')">All</button>
+    <div class="category-container">
 
-      <button onclick="filterProjectsBySense('haptic')">Haptic</button>
-      <button onclick="filterProjectsBySense('visual')">Visual</button>
+      <div class="container">
+        <div class="tabs">
+
+          <input onclick="filterProjects('reset')" type="radio" id="radio-1" name="tabs" checked />
+          <label class="tab" for="radio-1">All</label>
+
+          <input onclick="filterProjectsBySense('haptic')" type="radio" id="radio-2" name="tabs" />
+          <label class="tab" for="radio-2">Haptic</label>
+
+          <input onclick="filterProjectsBySense('visual')" type="radio" id="radio-3" name="tabs" />
+          <label class="tab" for="radio-3">Visual</label>
+
+          <input onclick="filterProjects('installation')" type="radio" id="radio-4" name="tabs" />
+          <label class="tab" for="radio-4">Installation</label>
+
+          <input onclick="filterProjects('performance')" type="radio" id="radio-5" name="tabs" />
+          <label class="tab" for="radio-5">Performance</label>
+
+          <span class="glider"></span>
+        </div>
+      </div>
+
     </div>
 
     <div class="project-overview">
