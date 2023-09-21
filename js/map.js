@@ -172,6 +172,28 @@ function updateMarkers() {
     if (feature.properties.projects.some((el) => el !== null)) {
       el.projects = feature;
       el.className = "marker";
+
+      let index = 1;
+      for(project of feature.properties.projects) {
+        switch(index){
+        
+          case 1: {
+            el.classList.add('marker-1');
+            console.log(1);
+            break;
+          } 
+          case 2: {
+            el.classList.add('marker-2');
+            console.log(2);
+            break;
+          }
+          default: {
+            break;
+          }
+  
+        }
+        index++;
+      }
       el.addEventListener("click", () => openDialog(el.projects));
 
       // make a marker for each feature and add to the map
@@ -221,20 +243,19 @@ function populateDetails(project) {
 
 // Initialize map stuff
 
-async () => {
-  const map = new mapboxgl.Map({
-    container: "map", // container ID
-    style: "mapbox://styles/mapbox/standard-beta", // style URL
-    center: [13.806243, 44.884439], // starting position [lng, lat]
-    zoom: 17, // starting zoom
-    maxBounds: bounds,
-    pitch: 60,
-  });
+const map = new mapboxgl.Map({
+  container: "map", // container ID
+  style: "mapbox://styles/mapbox/standard-beta", // style URL
+  center: [13.806243, 44.884439], // starting position [lng, lat]
+  zoom: 17, // starting zoom
+  maxBounds: bounds,
+  pitch: 60,
+});
 
   map.addControl(new mapboxgl.NavigationControl());
-  updateMarkers();
+    updateMarkers();
 
-  await map.once("style.load");
+(async () => {
 
   map.on("load", function () {
     map.setConfigProperty(
@@ -248,5 +269,12 @@ async () => {
       "showRoadLabels",
       false
     );
+    
   });
-};
+
+  await map.once('load');
+
+  document.getElementById('loading-wrapper').classList.add('loading-done');
+
+
+})();

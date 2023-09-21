@@ -32,7 +32,6 @@
 }
 
 .marker {
-  background-image: url("../assets/marker.png");
   background-size: contain;
   background-repeat: no-repeat;
   width: 120px;
@@ -41,6 +40,15 @@
   animation: slide-up 0.5s ease;
   position: absolute;
 }
+
+.marker-1 {
+  background-image: url("../assets/marker-1.svg");
+}
+
+.marker-2 {
+  background-image: url("../assets/marker-2.svg");
+}
+
 
 .marker-animation {
   position: absolute;
