@@ -124,12 +124,56 @@ function filterProjectsBySense(sense) {
   updateMarkers();
 }
 
+///test from now on till this comment ends
+function filterProjectsByYear(year) {
+  year = parseInt(year, 10);
+
+  let areas = updateLocationList().areas;
+
+  let filteredAreas = areas.filter(area => area.year === year);
+
+  console.log(`Filtered ${filteredAreas.length} areas for year ${year}`);
+
+ 
+  currentMarkers.forEach(marker => {
+    console.log('Removing a marker');
+    marker.remove();
+  });
+
+  currentMarkers = [];
+
+  filteredAreas.forEach(area => {
+    let marker = createMarker(area.geometry.coordinates);
+    currentMarkers.push(marker);
+  });
+
+  console.log(`Created ${currentMarkers.length} markers for year ${year}`);
+}
+
+
+let yearButtons = [
+  document.querySelector('.year-btn-2018'),
+  document.querySelector('.year-btn-2019'),
+  document.querySelector('.year-btn-2021'),
+  document.querySelector('.year-btn-2022'),
+];
+
+yearButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    let year = button.textContent;
+    console.log(`Button for year ${year} clicked`);
+    filterProjectsByYear(year);
+  });
+});
+//andy needed here sorry ND you are doing most of the things even tho i work for hours i have no idea what i am doing thanks ND for everything
+
 function updateLocationList() {
   return {
     type: "ProjectCollection",
     areas: [
       {
         type: "Location",
+        year: 2018,
         geometry: {
           type: "Point",
           coordinates: [13.8078657, 44.8837266],
@@ -141,6 +185,7 @@ function updateLocationList() {
       },
       {
         type: "Location",
+        year: 2019,
         geometry: {
           type: "Point",
           coordinates: [13.812157, 44.891861],
@@ -151,6 +196,7 @@ function updateLocationList() {
       },
       {
         type: "Location",
+        year: 2021,
         geometry: {
           type: "Point",
           coordinates: [13.809157, 44.894861],
@@ -161,6 +207,7 @@ function updateLocationList() {
       },
       {
         type: "Location",
+        year: 2022,
         geometry: {
           type: "Point",
           coordinates: [13.802157, 44.891861],
