@@ -5,67 +5,71 @@ const bounds = [
   [13.852966, 44.908517], // Northeast coordinates
 ];
 
-const ProjectList = [
-  {
-    id: 1,
-    slug: "project_1",
-    type: "installation",
-    name: "krill",
-    description: "Project Description",
-    senses: ["haptic", "visual"],
-  },
-  {
-    id: 2,
-    slug: "project_2",
-    type: "installation",
-    name: "crayfish",
-    description: "Project Description",
-    senses: ["haptic", "visual"],
-  },
-  {
-    id: 3,
-    slug: "project_3",
-    type: "performance",
-    name: "prawn",
-    description: "Project Description",
-    senses: ["visual"],
-  },
-  {
-    id: 4,
-    slug: "project_4",
-    type: "performance",
-    name: "lobster",
-    description: "Project Description",
-    senses: ["haptic", "visual"],
-  },
-  {
-    id: 5,
-    slug: "project_5",
-    type: "installation",
-    name: "langoustine",
-    description: "Project Description",
-    senses: ["visual"],
-  },
-  {
-    id: 6,
-    slug: "project_6",
-    type: "installation",
-    name: "shrimp",
-    description: "Project Description",
-    senses: ["haptic", "visual"],
-  },
-  {
-    id: 7,
-    slug: "project_7",
-    type: "performance",
-    name: "crab",
-    description: "Project Description",
-    senses: ["haptic"],
-  },
-];
-
-let filteredProjectList = ProjectList;
+//Initialize some stuff
 let currentMarkers = [];
+let filteredProjectList;
+let locationList;
+let ProjectList;
+let map;
+
+// Retrieve projects
+let req = new XMLHttpRequest();
+
+req.onreadystatechange = () => {
+  if (req.readyState == XMLHttpRequest.DONE) {
+
+    const result = JSON.parse(req.responseText);
+
+    ProjectList = result.record;
+    filteredProjectList = ProjectList;
+
+    locationList = updateLocationList();
+
+    // Initialize map stuff
+
+    map = new mapboxgl.Map({
+      container: "map", // container ID
+      style: "mapbox://styles/mapbox/standard-beta", // style URL
+      center: [13.805493, 44.899077], // starting position [lng, lat]
+      zoom: 17, // starting zoom
+      maxBounds: bounds,
+      pitch: 65,
+      bearing: 160
+    });
+
+    (async () => {
+      map.on("load", function () {
+        map.setConfigProperty(
+          "basemap",
+          "lightPreset",
+          "dusk",
+          "showPointOfInterestLabels",
+          false,
+          "showPlaceLabels",
+          false,
+          "showRoadLabels",
+          false
+        );
+      });
+
+      await map.once('load');
+
+      updateMarkers();
+      
+      document.getElementById('loading-wrapper').classList.add('loading-done');
+    })();
+
+    map.addControl(new mapboxgl.NavigationControl());
+    
+
+  }
+};
+
+req.open("GET", "https://api.jsonbin.io/v3/b/650c61c912a5d3765981205a", true);
+req.setRequestHeader("X-Master-Key", "$2a$10$Tw5DZmmLnLrkxrfVWRwguucmIGDPN7Mo4FZAImYzSUZvyR8mH9x4u");
+req.send();
+
+
 
 //Get a project by its slug (name), this is used by the location list object
 function getProject(slug) {
@@ -74,6 +78,17 @@ function getProject(slug) {
   } else {
     return filteredProjectList.filter((x) => x.slug === slug);
   }
+
+}
+
+//Get matching projects by providing area coordinates
+function getProjects(coord1, coord2) {
+  if (filteredProjectList.filter((x) => x.longtitude === coord1).length == 0) {
+    return null;
+  } else {
+    return filteredProjectList.filter((x) => x.longtitude === coord1 && filteredProjectList.filter((x) => x.lattitude === coord2));
+  }
+
 }
 
 // Filter projects by attribute
@@ -87,9 +102,9 @@ function filterProjects(type) {
   if (type === "reset") {
     filteredProjectList = ProjectList;
   } else {
-    filteredProjectList = ProjectList.filter((x) => x.type === type);
+    filteredProjectList = ProjectList.filter((x) => x.type.includes(type));
   }
-  updateLocationList();
+  locationList = updateLocationList();
   updateMarkers();
 }
 
@@ -104,27 +119,23 @@ function filterProjectsBySense(sense) {
     filteredProjectList = ProjectList;
   } else {
     filteredProjectList = ProjectList.filter((x) => x.senses.includes(sense));
-    console.log(filteredProjectList);
   }
-  updateLocationList();
+  locationList = updateLocationList();
   updateMarkers();
 }
 
-let locationList;
-updateLocationList();
-
 function updateLocationList() {
-  locationList = {
+  return {
     type: "ProjectCollection",
     areas: [
       {
         type: "Location",
         geometry: {
           type: "Point",
-          coordinates: [13.802957, 44.895861],
+          coordinates: [13.8078657, 44.8837266],
         },
         properties: {
-          projects: [getProject("project_1"), getProject("project_2")],
+          projects: [getProjects(13.8078657, 44.8837266), getProject("cocoon")],
           description: "this is an area",
         },
       },
@@ -135,7 +146,7 @@ function updateLocationList() {
           coordinates: [13.812157, 44.891861],
         },
         properties: {
-          projects: [getProject("project_4")],
+          projects: [getProject("the-essence-of-casa-matta")],
         },
       },
       {
@@ -145,7 +156,7 @@ function updateLocationList() {
           coordinates: [13.809157, 44.894861],
         },
         properties: {
-          projects: [getProject("project_3"), getProject("project_5")],
+          projects: [getProject("lithic-technology"), getProject("layerz")],
         },
       },
       {
@@ -155,7 +166,7 @@ function updateLocationList() {
           coordinates: [13.802157, 44.891861],
         },
         properties: {
-          projects: [getProject("project_6"), getProject("project_7")],
+          projects: [getProject("project-soba"), getProject("exosensor")],
         },
       },
     ],
@@ -163,28 +174,33 @@ function updateLocationList() {
 }
 
 function updateMarkers() {
-  for (const feature of locationList.areas) {
+
+  for (const area of locationList.areas) {
+
     // create a HTML element for each feature
     const el = document.createElement("div");
 
-    console.log(feature.properties);
 
-    if (feature.properties.projects.some((el) => el !== null)) {
-      el.projects = feature;
+    if (area.properties.projects.some((el) => el !== null)) {
+      el.projects = area;
       el.className = "marker";
 
-      let index = 1;
-      for(project of feature.properties.projects) {
+      let index = 0;
+
+      for(project of area.properties.projects) {
+
+        if(project !== null) {
+          index++;
+        }
+
         switch(index){
-        
           case 1: {
             el.classList.add('marker-1');
-            console.log(1);
             break;
           } 
           case 2: {
             el.classList.add('marker-2');
-            console.log(2);
+            console.log(project);
             break;
           }
           default: {
@@ -192,17 +208,17 @@ function updateMarkers() {
           }
   
         }
-        index++;
       }
       el.addEventListener("click", () => openDialog(el.projects));
 
       // make a marker for each feature and add to the map
       newMarker = new mapboxgl.Marker(el)
-        .setLngLat(feature.geometry.coordinates)
+        .setLngLat(area.geometry.coordinates)
         .addTo(map);
       currentMarkers.push(newMarker);
 
       el.classList.add("marker-animation");
+
     } else {
       continue;
     }
@@ -210,8 +226,6 @@ function updateMarkers() {
 }
 
 function openDialog(projects) {
-
-    console.log(projects);
     map.flyTo({
     center: [projects.geometry.coordinates[0], projects.geometry.coordinates[1]],
     essential: true // this animation is considered essential with respect to prefers-reduced-motion
@@ -249,41 +263,3 @@ function populateDetails(project) {
   return details;
 }
 
-// Initialize map stuff
-
-const map = new mapboxgl.Map({
-  container: "map", // container ID
-  style: "mapbox://styles/mapbox/standard-beta", // style URL
-  center: [13.805493, 44.899077], // starting position [lng, lat]
-  zoom: 17, // starting zoom
-  maxBounds: bounds,
-  pitch: 65,
-  bearing: 160
-});
-
-  map.addControl(new mapboxgl.NavigationControl());
-    updateMarkers();
-
-(async () => {
-
-  map.on("load", function () {
-    map.setConfigProperty(
-      "basemap",
-      "lightPreset",
-      "dusk",
-      "showPointOfInterestLabels",
-      false,
-      "showPlaceLabels",
-      false,
-      "showRoadLabels",
-      false
-    );
-    
-  });
-
-  await map.once('load');
-
-  document.getElementById('loading-wrapper').classList.add('loading-done');
-
-
-})();
