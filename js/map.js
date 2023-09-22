@@ -74,11 +74,16 @@ function getGoogleImageID(url){
   if(url.includes("drive")){
     const checker = /\d([A-Za-z0-9\-\_]+)\w+/;
     let result = url.match(checker);
-    const validUrl = "https://drive.google.com/uc?export=view&id=" + result[0]
+
+
+    const validUrl = "https://drive.google.com/uc?export=view&id=" + result[0];
+
+    console.log(validUrl);
     return (validUrl);
   } else {
     return (url);
   }
+
 }
 
 
@@ -564,7 +569,7 @@ function updateLocationList() {
         areadescription: "Sitting along the northern edge of Pula Bay, the Katarina Naval Base, a monumental naval stronghold in northern Croatia, carries a rich history. Abandoned during Yugoslavia's dissolution in the early 1990s, this site beckons explorers seeking history and urban adventure.Originally part of the Austro-Hungarian defense system for Pula, it expanded during Italian rule, adding to its historical significance. Stretching over 6 kilometers of coastline, it boasts around a hundred structures, linked to the mainland by a remarkable 250-meter-long bridge.Though time has aged it, lending an air of abandonment to some parts, the base retains a unique urbex charm for adventurers. The scars of the Yugoslavian war linger, particularly in the higher sea-facing windows, bearing witness to the site's tumultuous past. Since Croatia's formation, the base has languished in disuse and decay, yet it holds cultural heritage status. Despite this recognition, plans are afoot to transform the area into a bustling marina harbor, blending its rich history with a promising future. Katarina Naval Base serves as a portal to Croatia's maritime heritage and stands as a symbol of resilience. It offers a glimpse into the nation's history, wartime struggles, and the potential for rebirth.",
         areaimg: ["https://pepperurbex.com/wp-content/uploads/2019/09/Naval-Base-Pula-1-van-1-21-768x512.jpg",
    "https://pepperurbex.com/wp-content/uploads/2019/09/Naval-Base-Pula-1-van-1-16-768x512.jpg"],
-        areavideo: ["https://streamable.com/e/qcfr2k"]
+        areavideo: ["https://streamable.com/e/v6nxrn"]
         },
       },
       {

@@ -64,6 +64,8 @@
 
 .popup-title-container {
     margin-top: 2.5em;
+    height: 2em;
+    margin-bottom: 2em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -98,7 +100,6 @@
 .popup-content-left-bottom {
     height: 100%;
     width: 100%;
-    margin-top: 0.3em;
     margin-bottom: 1.5em;
     display: flex;
     flex-direction: row;
@@ -106,18 +107,14 @@
 }
 
 .popup-content-left-text {
-    
     height: auto;
-    margin-top: 1.5em;
     width: 52%;
     font-family: Merriweather, serif;
 }
 
 .popup-content-left-images {
     height: 100%;
-    margin-top: 1.5em;
     width: 44%;
-    
 }
 
 .popup-content-right {
@@ -143,7 +140,8 @@
 
 .history-image {
     object-fit: cover;
-    width: 100%;
+    width: 95%;
+    margin-left: 5%;
     border-radius: 32px;
     max-height: 33%;
     margin-bottom: 1em;
@@ -172,8 +170,8 @@
 }
 
 #card-container {
-    margin-top: 0.3em;
     margin-bottom: 1.5em;
+    margin-left: 2em;
     width: 95%;
     overflow-y: scroll;
     padding-right: 5%;
