@@ -310,3 +310,26 @@ function populateDetails(project) {
   return details;
 }
 
+//Over here it has to link to something from the project overview tab :)
+
+// Transition video
+const videoLinks = document.querySelectorAll(".video-link");
+videoLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    const videoUrl = link.projects.video;
+    openFullScreenVideo(videoUrl);
+  });
+});
+
+function openFullScreenVideo(videoUrl) {
+  const videoContainer = document.createElement("div");
+  videoContainer.classList.add("full-screen-video-container");
+
+  const videoElement = document.createElement("video");
+  videoElement.src = videoUrl;
+  videoElement.controls = true;
+
+  videoContainer.appendChild(videoElement);
+  document.body.appendChild(videoContainer);
+}
