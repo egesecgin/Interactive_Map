@@ -26,7 +26,7 @@
 .project-overview-pula {
     position: relative;
     left: 0;
-    flex-grow: 1;
+    flex: 1;
     height: 100%;
     border-radius: 50px;
     margin-right: 1em;
@@ -37,7 +37,7 @@
 .project-overview-zurich {
     position: relative;
     right: 0;
-    flex-grow: 1;
+    flex: 1;
     height: 100%;
     border-radius: 50px;
     margin-left: 1em;
@@ -76,7 +76,7 @@
 
 .project-overview-active {
     transition: all 300ms;
-    flex-grow: 5;
+    flex-grow: 2.5;
 }
 
 .project-overview-image-active {

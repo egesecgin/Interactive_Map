@@ -148,9 +148,16 @@
     height: 5em;
 }
 
-.project-card-image {
+.project-card-image-container {
     height: 25em;
+    width: auto;
     background-color: rgb(155, 126, 126);
+}
+
+.project-card-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 
