@@ -1,5 +1,26 @@
-body {
-  font-family: "Merriweather";
+* {
+  font-family: Merriweather, serif;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #985944; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #985944; 
 }
 
 .category-container {
@@ -116,17 +137,6 @@ body {
   margin: 0 auto 0 auto;
 }
 
-.project-overview {
-  position: fixed;
-  bottom: 20vh;
-  left: 5em;
-  height: 28vh;
-  width: 8em;
-  background-color: rgb(255, 255, 255);
-  border-radius: 100px;
-  margin: 0 auto 0 auto;
-}
-
 .marker {
   background-size: contain;
   background-repeat: no-repeat;
@@ -143,6 +153,18 @@ body {
 
 .marker-2 {
   background-image: url("../assets/marker-2.svg");
+}
+
+.marker-3 {
+  background-image: url("../assets/marker-3.svg");
+}
+
+.marker-4 {
+  background-image: url("../assets/marker-4.svg");
+}
+
+.marker-5 {
+  background-image: url("../assets/marker-5.svg");
 }
 
 

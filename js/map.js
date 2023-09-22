@@ -83,10 +83,11 @@ function getProject(slug) {
 
 //Get matching projects by providing area coordinates
 function getProjects(coord1, coord2) {
-  if (filteredProjectList.filter((x) => x.longtitude === coord1).length == 0) {
+
+  if (filteredProjectList.filter((x) => x.longitude === coord1).length === 0) {
     return null;
   } else {
-    return filteredProjectList.filter((x) => x.longtitude === coord1 && filteredProjectList.filter((x) => x.lattitude === coord2));
+    return filteredProjectList.filter((x) => x.longitude === coord1 && x.latitude === coord2);
   }
 
 }
@@ -179,43 +180,9 @@ function updateLocationList() {
           coordinates: [13.8078657, 44.8837266],
         },
         properties: {
-          projects: [getProjects(13.8078657, 44.8837266), getProject("cocoon")],
+          projects: [getProjects(13.8078657, 44.8837266)],
           description: "this is an area",
-        },
-      },
-      {
-        type: "Location",
-        year: 2019,
-        geometry: {
-          type: "Point",
-          coordinates: [13.812157, 44.891861],
-        },
-        properties: {
-          projects: [getProject("the-essence-of-casa-matta")],
-        },
-      },
-      {
-        type: "Location",
-        year: 2021,
-        geometry: {
-          type: "Point",
-          coordinates: [13.809157, 44.894861],
-        },
-        properties: {
-          projects: [getProject("lithic-technology"), getProject("layerz")],
-        },
-      },
-      {
-        type: "Location",
-        year: 2022,
-        geometry: {
-          type: "Point",
-          coordinates: [13.802157, 44.891861],
-        },
-        properties: {
-          projects: [getProject("project-soba"), getProject("exosensor")],
-        },
-      },
+        }
     ],
   };
 }
@@ -224,30 +191,44 @@ function updateMarkers() {
 
   for (const area of locationList.areas) {
 
+
     // create a HTML element for each feature
     const el = document.createElement("div");
-
 
     if (area.properties.projects.some((el) => el !== null)) {
       el.projects = area;
       el.className = "marker";
 
       let index = 0;
+      let projectList = area.properties.projects[0]
 
-      for(project of area.properties.projects) {
 
-        if(project !== null) {
-          index++;
-        }
+      for(project of projectList) {
+
+
+        index++;
+
 
         switch(index){
+          
           case 1: {
             el.classList.add('marker-1');
             break;
           } 
           case 2: {
             el.classList.add('marker-2');
-            console.log(project);
+            break;
+          }
+          case 3: {
+            el.classList.add('marker-3');
+            break;
+          }
+          case 4: {
+            el.classList.add('marker-4');
+            break;
+          }
+          case 5: {
+            el.classList.add('marker-5');
             break;
           }
           default: {
@@ -256,7 +237,7 @@ function updateMarkers() {
   
         }
       }
-      el.addEventListener("click", () => openDialog(el.projects));
+      el.addEventListener("click", () => openDialog(projectList, area.geometry.coordinates));
 
       // make a marker for each feature and add to the map
       newMarker = new mapboxgl.Marker(el)
@@ -272,21 +253,73 @@ function updateMarkers() {
   }
 }
 
-function openDialog(projects) {
+function expandView(id1, id2, id3, id4, id5, id6) {
+
+  console.log(id1);
+  console.log(id2);
+  console.log(id3);
+  console.log(id4);
+  console.log(id5);
+  console.log(id6);
+
+
+    setTimeout(function() {
+      document.getElementById(id1).classList.add('project-overview-active');
+      document.getElementById(id3).classList.add('project-overview-image-active');
+    }, 100);
+
+    setTimeout(function() {
+      document.getElementById(id2).classList.add('project-overview-description-active');
+    }, 300);
+
+    document.getElementById(id5).classList.remove('project-overview-description-active');
+    setTimeout(function() {
+      document.getElementById(id6).classList.remove('project-overview-image-active');
+      document.getElementById(id4).classList.remove('project-overview-active');
+    }, 100);
+
+}
+
+function openOverview() {
+  document.getElementById('project-overview').classList.add('project-overview-opened');
+}
+
+function closeDialog() {
+  let dialog = document.getElementById('overview-dialog');
+  dialog.classList.remove('open-dialog');
+  document.getElementById('dimmer').classList.remove('dimmer-active');
+  const el = document.getElementById("card-container");
+  el.innerHTML = '';
+}
+
+function closeOverview() {
+  document.getElementById('project-overview').classList.remove('project-overview-opened');
+}
+
+
+function openDialog(projects, coordinates) {
+
+  let dialog = document.getElementById('overview-dialog');
+
+  setTimeout(function() {
+    document.getElementById('dimmer').classList.add('dimmer-active');
+    dialog.classList.add('open-dialog');
+  }, 500);
+
+
+  console.log(projects);
     map.flyTo({
-    center: [projects.geometry.coordinates[0], projects.geometry.coordinates[1]],
+    center: [coordinates[0], coordinates[1]],
     essential: true // this animation is considered essential with respect to prefers-reduced-motion
     });
 
 
-  let areaProjectList = projects.properties.projects;
+  const el = document.getElementById("card-container");
 
-  const el = document.getElementById("project-overview");
-
-  for (project of areaProjectList) {
+  for (project of projects) {
     if (project !== null) {
-      const item = document.createElement("li");
-      item.innerHTML = populateDetails(project[0]);
+      const item = document.createElement("ul");
+      item.innerHTML = populateDetails(project);
       el.appendChild(item);
     }
   }
@@ -300,11 +333,12 @@ function populateDetails(project) {
   }
 
   const details = `
-      <div>
-        <div>Name: ${project.name}</span>
-        <div>Type: ${project.type}</div>
-        <div>ID: ${project.id}</div>
-        ${senses.join("")}
+      <div class="project-card" onclick="openOverview()">
+        <div class="project-card-title">
+          <div class="popup-title">${project.name}</div>
+        </div>
+        <div class="project-card-image">
+        </div>
       </div>
     `;
   return details;
