@@ -125,7 +125,6 @@
     background-color: #D9DBD5;
     width: 45%;
     display: flex;
-
     flex-direction: column;
     justify-content: start;
 }
@@ -210,6 +209,35 @@
     object-fit: cover;
 }
 
+#content {
+    visibility: hidden;
+}
+
+#video-player {
+}
+
+.area-video {
+    margin-left: -20em;
+    width: 120em; 
+    height: 100%; 
+    left: 0;
+    top: 0;
+    position: absolute;
+    overflow: hidden;
+}
+
+.stop-video {
+    animation: vanish 500ms;
+    -webkit-animation-fill-mode:forwards; animation-fill-mode:forwards;
+}
+
+.popup-content-visible {
+    opacity: 1;
+    visibility: visible;
+    animation: appear 500ms;
+    -webkit-animation-fill-mode:forwards; animation-fill-mode:forwards;
+}
+
 
 @keyframes dim {
     0% {
@@ -228,5 +256,15 @@
     }
     100% {
       opacity: 1;
+    }
+  }
+
+  @keyframes vanish {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      visibility: hidden;
     }
   }
