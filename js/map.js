@@ -125,12 +125,56 @@ function filterProjectsBySense(sense) {
   updateMarkers();
 }
 
+///test from now on till this comment ends
+function filterProjectsByYear(year) {
+  year = parseInt(year, 10);
+
+  let areas = updateLocationList().areas;
+
+  let filteredAreas = areas.filter(area => area.year === year);
+
+  console.log(`Filtered ${filteredAreas.length} areas for year ${year}`);
+
+ 
+  currentMarkers.forEach(marker => {
+    console.log('Removing a marker');
+    marker.remove();
+  });
+
+  currentMarkers = [];
+
+  filteredAreas.forEach(area => {
+    let marker = createMarker(area.geometry.coordinates);
+    currentMarkers.push(marker);
+  });
+
+  console.log(`Created ${currentMarkers.length} markers for year ${year}`);
+}
+
+
+let yearButtons = [
+  document.querySelector('.year-btn-2018'),
+  document.querySelector('.year-btn-2019'),
+  document.querySelector('.year-btn-2021'),
+  document.querySelector('.year-btn-2022'),
+];
+
+yearButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    let year = button.textContent;
+    console.log(`Button for year ${year} clicked`);
+    filterProjectsByYear(year);
+  });
+});
+//andy needed here sorry ND you are doing most of the things even tho i work for hours i have no idea what i am doing thanks ND for everything
+
 function updateLocationList() {
   return {
     type: "ProjectCollection",
     areas: [
       {
         type: "Location",
+        year: 2018,
         geometry: {
           type: "Point",
           coordinates: [13.8078657, 44.8837266],
@@ -138,8 +182,7 @@ function updateLocationList() {
         properties: {
           projects: [getProjects(13.8078657, 44.8837266)],
           description: "this is an area",
-        },
-      }
+        }
     ],
   };
 }
@@ -301,3 +344,26 @@ function populateDetails(project) {
   return details;
 }
 
+//Over here it has to link to something from the project overview tab :)
+
+// Transition video
+const videoLinks = document.querySelectorAll(".video-link");
+videoLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    const videoUrl = link.projects.video;
+    openFullScreenVideo(videoUrl);
+  });
+});
+
+function openFullScreenVideo(videoUrl) {
+  const videoContainer = document.createElement("div");
+  videoContainer.classList.add("full-screen-video-container");
+
+  const videoElement = document.createElement("video");
+  videoElement.src = videoUrl;
+  videoElement.controls = true;
+
+  videoContainer.appendChild(videoElement);
+  document.body.appendChild(videoContainer);
+}
