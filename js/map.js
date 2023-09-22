@@ -69,11 +69,15 @@ req.setRequestHeader("X-Master-Key", "$2a$10$Tw5DZmmLnLrkxrfVWRwguucmIGDPN7Mo4FZ
 req.send();
 
 function getGoogleImageID(url){
-  const checker = /\d([A-Za-z0-9\-\_]+)\w+/;
-  let result = url.match(checker);
-  const validUrl = "https://drive.google.com/uc?export=view&id=" + result[0]
 
-  return (validUrl);
+  if(url.includes("drive")){
+    const checker = /\d([A-Za-z0-9\-\_]+)\w+/;
+    let result = url.match(checker);
+    const validUrl = "https://drive.google.com/uc?export=view&id=" + result[0]
+    return (validUrl);
+  } else {
+    return (url);
+  }
 }
 
 
@@ -245,7 +249,6 @@ function expandView(id1, id2, id3, id4, id5, id6) {
 
 }
 
-
 function openOverview(id) {
   const project = getProject(id)[0];
   document.getElementById('project-overview').classList.add('project-overview-opened');
@@ -266,8 +269,13 @@ function closeDialog() {
 
 function closeOverview() {
   document.getElementById('project-overview').classList.remove('project-overview-opened');
-}
 
+  document.getElementById('project-overview-title').innerHTML = "";
+  document.getElementById('project-overview-image-pula').src = "";
+  document.getElementById('project-overview-image-zurich').src = "";
+  document.getElementById('project-overview-description-pula').innerHTML = "";
+  document.getElementById('project-overview-description-zurich').innerHTML = "";
+}
 
 function openDialog(projects, area) {
 
@@ -279,7 +287,6 @@ function openDialog(projects, area) {
   }, 500);
 
 
-  console.log(projects);
     map.flyTo({
     center: [area.geometry.coordinates[0], area.geometry.coordinates[1]],
     essential: true // this animation is considered essential with respect to prefers-reduced-motion
@@ -287,6 +294,16 @@ function openDialog(projects, area) {
 
   document.getElementById('location-title-text').innerHTML = "About " + area.properties.areaname;
   document.getElementById('location-description-text').innerHTML = area.properties.areadescription;
+  
+  let image_container = document.getElementById('history-image-container');
+  image_container.innerHTML = "";
+
+  for(imageUrl of area.properties.areaimg){
+    console.log(imageUrl);
+    const image = document.createElement("ul");
+    image.innerHTML = `<img class="history-image" src="${getGoogleImageID(imageUrl)}" alt="">`
+    image_container.appendChild(image);
+  }
 
 
   const el = document.getElementById("card-container");
