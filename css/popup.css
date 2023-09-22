@@ -63,7 +63,7 @@
 }
 
 .popup-title-container {
-    margin-top: 2em;
+    margin-top: 2.5em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -75,8 +75,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 80%;
     gap: 0.4em;
-    font-size: 36px;
+    font-size: 30px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -97,6 +98,7 @@
 .popup-content-left-bottom {
     height: 100%;
     width: 100%;
+    margin-top: 0.3em;
     margin-bottom: 1.5em;
     display: flex;
     flex-direction: row;
@@ -104,6 +106,7 @@
 }
 
 .popup-content-left-text {
+    
     height: auto;
     margin-top: 1.5em;
     width: 52%;
@@ -122,8 +125,9 @@
     background-color: #D9DBD5;
     width: 45%;
     display: flex;
+
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
 }
 
 
@@ -169,7 +173,7 @@
 }
 
 #card-container {
-    margin-top: 1.5em;
+    margin-top: 0.3em;
     margin-bottom: 1.5em;
     width: 95%;
     overflow-y: scroll;
