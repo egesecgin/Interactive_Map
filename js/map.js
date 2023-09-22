@@ -183,6 +183,7 @@ function updateLocationList() {
           projects: [getProjects(13.8078657, 44.8837266)],
           description: "this is an area",
         }
+      }
     ],
   };
 }
@@ -335,7 +336,7 @@ function populateDetails(project) {
   const details = `
       <div class="project-card" onclick="openOverview()">
         <div class="project-card-title">
-          <div class="popup-title">${project.name}</div>
+          <div class="card-title">${project.name}</div>
         </div>
         <div class="project-card-image">
         </div>
