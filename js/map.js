@@ -210,7 +210,60 @@ function updateMarkers() {
   }
 }
 
+function expandView(id1, id2, id3, id4, id5, id6) {
+
+  console.log(id1);
+  console.log(id2);
+  console.log(id3);
+  console.log(id4);
+  console.log(id5);
+  console.log(id6);
+
+
+    setTimeout(function() {
+      document.getElementById(id1).classList.add('project-overview-active');
+      document.getElementById(id3).classList.add('project-overview-image-active');
+    }, 100);
+
+    setTimeout(function() {
+      document.getElementById(id2).classList.add('project-overview-description-active');
+    }, 300);
+
+    document.getElementById(id5).classList.remove('project-overview-description-active');
+    setTimeout(function() {
+      document.getElementById(id6).classList.remove('project-overview-image-active');
+      document.getElementById(id4).classList.remove('project-overview-active');
+    }, 100);
+
+}
+
+function openOverview() {
+  document.getElementById('project-overview').classList.add('project-overview-opened');
+}
+
+function closeDialog() {
+  let dialog = document.getElementById('overview-dialog');
+  dialog.classList.remove('open-dialog');
+  document.getElementById('dimmer').classList.remove('dimmer-active');
+  const el = document.getElementById("card-container");
+  el.innerHTML = '';
+}
+
+function closeOverview() {
+  document.getElementById('project-overview').classList.remove('project-overview-opened');
+}
+
+
 function openDialog(projects, coordinates) {
+
+  let dialog = document.getElementById('overview-dialog');
+
+  setTimeout(function() {
+    document.getElementById('dimmer').classList.add('dimmer-active');
+    dialog.classList.add('open-dialog');
+  }, 500);
+
+
   console.log(projects);
     map.flyTo({
     center: [coordinates[0], coordinates[1]],
@@ -218,11 +271,11 @@ function openDialog(projects, coordinates) {
     });
 
 
-  const el = document.getElementById("project-overview");
+  const el = document.getElementById("card-container");
 
   for (project of projects) {
     if (project !== null) {
-      const item = document.createElement("li");
+      const item = document.createElement("ul");
       item.innerHTML = populateDetails(project);
       el.appendChild(item);
     }
@@ -237,11 +290,12 @@ function populateDetails(project) {
   }
 
   const details = `
-      <div>
-        <div>Name: ${project.name}</span>
-        <div>Type: ${project.type}</div>
-        <div>ID: ${project.id}</div>
-        ${senses.join("")}
+      <div class="project-card" onclick="openOverview()">
+        <div class="project-card-title">
+          <div class="popup-title">${project.name}</div>
+        </div>
+        <div class="project-card-image">
+        </div>
       </div>
     `;
   return details;

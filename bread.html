@@ -12,10 +12,14 @@
       href="https://api.mapbox.com/mapbox-gl-js/v3.0.0-beta.1/mapbox-gl.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather">
+    <link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'>
+    
     <link href="./css/main.css" rel="stylesheet" />
     <link href="./css/loading.css" rel="stylesheet" />
     <link href="./css/tabs.css" rel="stylesheet" />
+    <link href="./css/popup.css" rel="stylesheet" />
+    <link href="./css/project-overview.css" rel="stylesheet" />
+
     <style>
       body {
         margin: 0;
@@ -72,10 +76,99 @@
 
     </div>
 
-    <div class="project-overview">
-      <h1>PROJECT OVERVIEW</h1>
-      <div id="project-overview"></div>
+    <div id="dimmer" class="dimmer" onclick="closeDialog()"></div>
+
+    <div id="overview-dialog" class="popup-container">
+
+      <div class="popup">
+
+        <img onclick="closeDialog()" class="popup-close" src="./assets/close.svg" alt="close popup icon">
+
+        <div class="popup-content-left">
+          <div class="popup-content-left-text">
+
+            <div class="popup-title-container">
+              <img class="popup-title-image" src="./assets/history.svg" alt="">
+              <div class="popup-title">About the Location</div>
+            </div>
+            
+
+            <div class="popup-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
+              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
+              laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit 
+              esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
+              officia deserunt mollit anim id est laborum.</div>
+  
+          </div>
+          <div class="popup-content-left-images">
+            <img class="history-image" src="./assets/history-2.png" alt="">
+            <img class="history-image" src="./assets/history-1.png" alt="">
+
+          </div>
+         
+        </div>
+        <div class="popup-content-right">
+
+          <div id="card-container">
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
+
+    <div id="project-overview" class="project-overview">
+
+      <img onclick="closeOverview()" class="overview-close" src="./assets/back.svg" alt="close overview icon">
+
+      <div class="project-overview-title-container">
+        <div class="project-overview-title">Project Title</div>
+      </div>
+
+      <div class="project-overview-image-container">
+
+        <div id="project-overview-pula" onclick="expandView('project-overview-pula', 'project-overview-description-pula', 'project-overview-image-pula', 'project-overview-zurich', 'project-overview-description-zurich', 'project-overview-image-zurich')" class="project-overview-pula">
+
+          <img id="project-overview-image-pula" class="project-overview-image" src="./assets/pula-image.png" alt="">
+        
+          <div id="project-overview-description-pula" class="project-overview-description">
+            “soba” is a surrealistic installation built out of the remnants of the building and makes the dynamics of this unique space visible. It is set up in front of the fascinating window, that 
+            connects the building to the nature outside, the ocean. To enhance the strong gravitational pull to the exterior, flakes of the walls are used and hang on the ceiling with a transparent, elastic thread. While closer to the 
+            walls more flakes are installed, they get less dense towards the center. This spread imitates an impression of dissolving wall-parts into open space and unfolds borders. While the wind blows, 
+            the hanging wall-pieces make a singular, subtle sound and causes a slight feeling of satisfaction, peace and freedom.
+          </div>
+
+          <div class="project-overview-caption-container">
+            <div class="project-overview-caption">Pula, Croatia</div>
+          </div>
+
+        </div>
+  
+        <div id="project-overview-zurich" onclick="expandView('project-overview-zurich', 'project-overview-description-zurich', 'project-overview-image-zurich', 'project-overview-pula', 'project-overview-description-pula', 'project-overview-image-pula')" class="project-overview-zurich" >
+
+          <img id="project-overview-image-zurich" class="project-overview-image" src="./assets/zurich-image.png" alt="">
+
+          <div id="project-overview-description-zurich" class="project-overview-description">
+            “soba” is a surrealistic installation built out of the remnants of the building and makes the dynamics of this unique space visible. It is set up in front of the fascinating window, that 
+            connects the building to the nature outside, the ocean. To enhance the strong gravitational pull to the exterior, flakes of the walls are used and hang on the ceiling with a transparent, elastic thread. While closer to the 
+            walls more flakes are installed, they get less dense towards the center. This spread imitates an impression of dissolving wall-parts into open space and unfolds borders. While the wind blows, 
+            the hanging wall-pieces make a singular, subtle sound and causes a slight feeling of satisfaction, peace and freedom.
+          </div>
+
+          <div class="project-overview-caption-container">
+            <div class="project-overview-caption">Toni, Zurich</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="project-overview-caption-bar-container">
+        <div class="project-overview-caption-bar"></div>
+      </div>
+      
+    </div>
+
   </body>
   <script src="./js/map.js"></script>
 </html>
