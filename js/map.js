@@ -149,6 +149,7 @@ function filterProjectsByYear(year) {
     }
   }
 
+
   if (year === "reset") {
     filteredProjectList = ProjectList;
   } else {
@@ -156,6 +157,7 @@ function filterProjectsByYear(year) {
   }
   locationList = updateLocationList();
   updateMarkers();
+
 }
 
 function updateMarkers() {
@@ -308,7 +310,7 @@ function populateDetails(project) {
   const details = `
       <div class="project-card" onclick="openOverview(${project.id})">
         <div class="project-card-title">
-          <div class="popup-title">${project.name}</div>
+          <div class="card-title">${project.name}</div>
         </div>
         <div class="project-card-image-container">
           <img class="project-card-image" src="${getGoogleImageID(project.img_pula)}" alt="">

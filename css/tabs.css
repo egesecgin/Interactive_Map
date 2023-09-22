@@ -7,10 +7,10 @@
 *:after,
 *:before {
 	box-sizing: border-box;
+	font-family: 'Montserrat', sans-serif;
 }
 
 body {
-	font-family: "Inter", sans-serif;
 	background-color: rgba(#e6eef9, 0.5);
 }
 .container {
@@ -24,6 +24,7 @@ body {
 	justify-content: center;
 }
 .tabs {
+	
 	display: flex;
 	position: relative;
 	background-color: #fff;
@@ -40,6 +41,7 @@ input[type="radio"] {
 }
 
 .tab {
+	
 	display: flex;
 	align-items: center;
 	justify-content: center;
