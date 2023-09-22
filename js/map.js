@@ -183,6 +183,7 @@ function updateLocationList() {
           projects: [getProjects(13.8078657, 44.8837266)],
           description: "this is an area",
         }
+      }
     ],
   };
 }
@@ -347,6 +348,7 @@ function populateDetails(project) {
 //Over here it has to link to something from the project overview tab :)
 
 // Transition video
+
 const videoLinks = document.querySelectorAll(".video-link");
 videoLinks.forEach((link) => {
   link.addEventListener("click", (event) => {
