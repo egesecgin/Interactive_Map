@@ -1,5 +1,12 @@
-* {
-    font-family: Merriweather, serif;
+ * {
+    /* font-family: Merriweather, serif; */
+}
+
+.popup-close {
+    margin: 20px;
+    width: 35px;
+    height: 35px;
+    
 }
 
 .dimmer {
@@ -33,7 +40,7 @@
 }
 
 .popup {
-    background-color: #ECE8E5;
+    background-color: #F9F2EC;
     position: absolute;
     width: 90em;
     height: 60em;
@@ -50,20 +57,64 @@
     height: 100%;
     width: 60%;
     display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin: 0em 1.5em 3em 1.5em;
+}
+
+.popup-title-container {
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4em;
+}
+
+.popup-title {
+    color: #985944;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4em;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.card-title {
+    color: #985944;
+    
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    font-family: 'Montserrat', sans-serif;
+    /* margin-bottom: 1em; */
+}
+
+.popup-content-left-bottom {
+    height: 100%;
+    width: 100%;
+    margin-bottom: 1.5em;
+    display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 
 .popup-content-left-text {
     height: auto;
-    margin-top: 3em;
-    width: 42%;
+    margin-top: 1.5em;
+    width: 52%;
+    font-family: Merriweather, serif;
 }
 
 .popup-content-left-images {
     height: auto;
-    margin-top: 3em;
-    width: 42%;
+    margin-top: 1.5em;
+    width: 38%;
+    object-fit: cover;
 }
 
 .popup-content-right {
@@ -71,18 +122,11 @@
     background-color: #D9DBD5;
     width: 45%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
-.popup-title {
-    color: #985944;
-    font-family: Merriweather;
-    font-size: 26px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    margin-bottom: 1em;
-}
+
 
 .popup-body {
     color: #5A5757;
@@ -96,15 +140,12 @@
 
 .history-image {
     width: 100%;
+    border-radius: 32px;
     height: auto;
     margin-bottom: 1em;
 }
 
-.popup-title-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-}
+
 
 .popup-title-image {
     width: 3em;
@@ -116,6 +157,7 @@
     position: absolute;
     top: 1em;
     left: 1em;
+
     transition: transform 200ms;
 }
 
@@ -126,8 +168,8 @@
 }
 
 #card-container {
-    margin-top: 2em;
-    margin-bottom: 3em;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
     width: 95%;
     overflow-y: scroll;
     padding-right: 5%;
@@ -135,16 +177,19 @@
 
 .project-card {
     width: 100%;
-    border-radius: 50px;
+    border-radius: 32px;
     height: 30em;
-    background-color: #ECE8E5;
+    background-color: #F9F2EC;
     overflow: hidden;
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
     margin-bottom: 2em;
 }
 
 .project-card-title {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    padding: 0.4em 0.3em 0em 1.5em;
+    text-align: left;
     height: 5em;
 }
 
