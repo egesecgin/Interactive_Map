@@ -64,6 +64,8 @@
 
 .popup-title-container {
     margin-top: 2.5em;
+    height: 2em;
+    margin-bottom: 2em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -98,7 +100,6 @@
 .popup-content-left-bottom {
     height: 100%;
     width: 100%;
-    margin-top: 0.3em;
     margin-bottom: 1.5em;
     display: flex;
     flex-direction: row;
@@ -106,18 +107,14 @@
 }
 
 .popup-content-left-text {
-    
     height: auto;
-    margin-top: 1.5em;
     width: 52%;
     font-family: Merriweather, serif;
 }
 
 .popup-content-left-images {
     height: 100%;
-    margin-top: 1.5em;
     width: 44%;
-    
 }
 
 .popup-content-right {
@@ -125,7 +122,6 @@
     background-color: #D9DBD5;
     width: 45%;
     display: flex;
-
     flex-direction: column;
     justify-content: start;
 }
@@ -144,7 +140,8 @@
 
 .history-image {
     object-fit: cover;
-    width: 100%;
+    width: 95%;
+    margin-left: 5%;
     border-radius: 32px;
     max-height: 33%;
     margin-bottom: 1em;
@@ -173,8 +170,8 @@
 }
 
 #card-container {
-    margin-top: 0.3em;
     margin-bottom: 1.5em;
+    margin-left: 2em;
     width: 95%;
     overflow-y: scroll;
     padding-right: 5%;
@@ -210,6 +207,35 @@
     object-fit: cover;
 }
 
+#content {
+    visibility: hidden;
+}
+
+#video-player {
+}
+
+.area-video {
+    margin-left: -20em;
+    width: 120em; 
+    height: 100%; 
+    left: 0;
+    top: 0;
+    position: absolute;
+    overflow: hidden;
+}
+
+.stop-video {
+    animation: vanish 500ms;
+    -webkit-animation-fill-mode:forwards; animation-fill-mode:forwards;
+}
+
+.popup-content-visible {
+    opacity: 1;
+    visibility: visible;
+    animation: appear 500ms;
+    -webkit-animation-fill-mode:forwards; animation-fill-mode:forwards;
+}
+
 
 @keyframes dim {
     0% {
@@ -228,5 +254,15 @@
     }
     100% {
       opacity: 1;
+    }
+  }
+
+  @keyframes vanish {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      visibility: hidden;
     }
   }

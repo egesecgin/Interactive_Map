@@ -2,6 +2,17 @@
   font-family: Merriweather, serif;
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  max-height: 100vh;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 15px;
