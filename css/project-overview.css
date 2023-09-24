@@ -1,10 +1,12 @@
 .project-overview {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: #ECE8E5;
+    overflow-y: scroll;
+    overflow-x: hidden;
     visibility: hidden;
     opacity: 0;
 }
@@ -34,6 +36,9 @@
     cursor: pointer;
     background-color: #dddddd;
     z-index: 9999;
+    -webkit-box-shadow: 4px 5px 18px -4px rgba(0,0,0,0.22); 
+    box-shadow: 4px 5px 18px -4px rgba(0,0,0,0.22);
+    transition: all 200ms;
 }
 
 .project-overview-zurich {
@@ -46,8 +51,21 @@
     transition: all 300ms;
     cursor: pointer;
     background-color: #dddddd;
+    z-index: 9999;
+    -webkit-box-shadow: 4px 5px 18px -4px rgba(0,0,0,0.22); 
+    box-shadow: 4px 5px 18px -4px rgba(0,0,0,0.22);
+    transition: all 200ms;
 }
 
+#project-overview-pula:hover {
+    transition: all ease-in-out 300ms;
+    transform: scale(1.01);
+}
+
+#project-overview-zurich:hover {
+    transition: all ease-in-out 300ms;
+    transform: scale(1.01);
+}
 
 .project-overview-image {
     object-fit: cover;
@@ -56,7 +74,6 @@
     transition: all 300ms;
     border-radius: 50px;
     position: relative;
-    
 }
 
 .project-overview-description {
@@ -123,6 +140,7 @@
     height: 10vh;
     position: relative;
     z-index: 1;
+    margin-top: 1.5em;
 }
 
 .project-overview-caption {
@@ -136,6 +154,7 @@
 }
 
 .project-overview-caption-bar {
+    margin-top: 3em;
     width: 50em;
     height: 0.5em;
     background-color: #985944;
@@ -152,10 +171,49 @@
     height: 11vh;
 }
 
+.project-overview-gallery {
+    height: 120vh;
+    width: 100vw;
+    padding: 10%;
+    padding-top: 30vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.gallery-section {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 49em;
+    justify-content: space-evenly;
+    padding: 2em;
+    background-color: #F9F2EC;
+    -webkit-box-shadow: 4px 5px 18px -1px rgba(0,0,0,0.31); 
+    box-shadow: 4px 5px 18px -1px rgba(0,0,0,0.31);
+    border-radius: 50px;
+}
+
+.gallery-image {
+    width: 21em;
+    height: 20em;
+    object-fit: cover;
+    margin: 0.5em;
+    border-radius: 22px;
+}
+
 .overview-close {
     position: fixed;    
     margin-top: 4em;
     margin-left: 4em;
+    transition: all 300ms;
+    cursor: pointer;
+}
+
+.overview-close:hover {
+    transform: translate(-15px, 0px);
+    transition: all 300ms;
 }
 
 .loading-container {
@@ -168,12 +226,25 @@
     top: 0;
 }
 
+.close-project-overview {
+    animation: vanish2 200ms;
+}
+
 @keyframes appear {
     0% {
       opacity: 0;
     }
     100% {
       opacity: 1;
+    }
+  }
+
+@keyframes vanish2 {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
     }
   }
 
