@@ -346,7 +346,6 @@ function openDialog(projects, area) {
   }
 
   const el = document.getElementById("card-container");
-
   for (project of projects) {
     if (project !== null) {
       const item = document.createElement("ul");
