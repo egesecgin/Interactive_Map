@@ -2,6 +2,14 @@
   font-family: Merriweather, serif;
 }
 
+.mapboxgl-ctrl-bottom-right {
+  display: none;
+}
+
+.mapboxgl-ctrl-bottom-left {
+  display: none;
+}
+
 ul {
   margin: 0;
   padding: 0;
@@ -156,6 +164,11 @@ body {
   cursor: pointer;
   animation: slide-up 0.5s ease;
   position: absolute;
+}
+
+.marker:hover {
+  width: 126px;
+  height: 105px;
 }
 
 .marker-1 {

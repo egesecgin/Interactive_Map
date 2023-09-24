@@ -1,8 +1,8 @@
 mapboxgl.accessToken =
   "pk.eyJ1IjoiaHlhZnVtaSIsImEiOiJjbG1xNnBmcGwwMG1oMmxvZXY3aXk0cjZwIn0.VqDSZnJW59A-ORUAp0gq-Q";
 const bounds = [
-  [13.777728, 44.854024], // Southwest coordinates
-  [13.852966, 44.908517], // Northeast coordinates
+  [13.776767, 44.868209], // Southwest coordinates
+  [13.845318, 44.901900], // Northeast coordinates
 ];
 
 //Initialize some stuff
@@ -59,13 +59,10 @@ req.onreadystatechange = () => {
       
       document.getElementById('loading-wrapper').classList.add('loading-done');
     })();
-
-    map.addControl(new mapboxgl.NavigationControl());
-
   }
 };
 
-req.open("GET", "https://api.jsonbin.io/v3/b/650d917e54105e766fb8271b", true);
+req.open("GET", "https://api.jsonbin.io/v3/b/650ee18912a5d376598211d3", true);
 req.setRequestHeader("X-Master-Key", "$2a$10$Tw5DZmmLnLrkxrfVWRwguucmIGDPN7Mo4FZAImYzSUZvyR8mH9x4u");
 req.send();
 
@@ -263,14 +260,30 @@ function openOverview(id) {
   document.getElementById('project-overview-image-zurich').src = getGoogleImageID(project.img_toni);
   document.getElementById('project-overview-description-pula').innerHTML = project.description;
   document.getElementById('project-overview-description-zurich').innerHTML = project.translation;
+
+  document.getElementById('gallery-1').src = project.pula_gallery1;
+  document.getElementById('gallery-2').src = project.pula_gallery2;
+  document.getElementById('gallery-3').src = project.pula_gallery3;
+  document.getElementById('gallery-4').src = project.pula_gallery4;
+
+  document.getElementById('gallery-5').src = project.toni_gallery1;
+  document.getElementById('gallery-6').src = project.toni_gallery2;
+  document.getElementById('gallery-7').src = project.toni_gallery3;
+  document.getElementById('gallery-8').src = project.toni_gallery4;
+
+
 }
 
 function closeDialog() {
   dialogOpen = false;
 
   let dialog = document.getElementById('overview-dialog');
-  dialog.classList.remove('open-dialog');
+  dialog.classList.add('close-dialog');
 
+  setTimeout(function() {
+    dialog.classList.remove('open-dialog');
+    dialog.classList.remove('close-dialog');
+  }, 300);
 
   document.getElementById('video-player').classList.remove('stop-video');
   document.getElementById('video-player').innerHTML =   "";
@@ -282,13 +295,37 @@ function closeDialog() {
 }
 
 function closeOverview() {
-  document.getElementById('project-overview').classList.remove('project-overview-opened');
 
-  document.getElementById('project-overview-title').innerHTML = "";
-  document.getElementById('project-overview-image-pula').src = "";
-  document.getElementById('project-overview-image-zurich').src = "";
-  document.getElementById('project-overview-description-pula').innerHTML = "";
-  document.getElementById('project-overview-description-zurich').innerHTML = "";
+
+  
+  let overview = document.getElementById('project-overview');
+  overview.classList.add('close-project-overview');
+
+
+  setTimeout(function() {
+    overview.classList.remove('close-project-overview');
+    overview.classList.remove('project-overview-opened');
+    overview.scrollTop = 0;
+
+
+    document.getElementById('project-overview-title').innerHTML = "";
+    document.getElementById('project-overview-image-pula').src = "";
+    document.getElementById('project-overview-image-zurich').src = "";
+    document.getElementById('project-overview-description-pula').innerHTML = "";
+    document.getElementById('project-overview-description-zurich').innerHTML = "";
+  
+    document.getElementById('project-overview-image-pula').classList.remove('project-overview-image-active');
+    document.getElementById('project-overview-image-zurich').classList.remove('project-overview-image-active');
+    document.getElementById('project-overview-zurich').classList.remove('project-overview-active');
+  
+    document.getElementById('project-overview-description-pula').classList.remove('project-overview-description-active');
+    document.getElementById('project-overview-description-zurich').classList.remove('project-overview-description-active');
+    document.getElementById('project-overview-pula').classList.remove('project-overview-active');
+  
+    
+  }, 300);
+
+
 }
 
 
@@ -350,16 +387,34 @@ function populateDetails(project) {
   const senses = [];
 
   for (let sense of project.senses) {
-    senses.push(`<div>${sense}</div>`);
+    switch(sense) {
+      case "Visual": {
+        senses.push(`<img class="sense-icon" src="./assets/visual.svg">`)
+      }
+      case "Auditive": {
+        senses.push(`<img class="sense-icon" src="./assets/auditive.svg">`)
+      }
+      case "Touch": {
+        senses.push(`<img class="sense-icon" src="./assets/haptic.svg">`)
+      }   
+    }
+
   }
 
   const details = `
       <div class="project-card" onclick="openOverview(${project.id})">
+
         <div class="project-card-title">
           <div class="card-title">${project.name}</div>
         </div>
+
         <div class="project-card-image-container">
           <img class="project-card-image" src="${getGoogleImageID(project.img_pula)}" alt="">
+
+          <div class="project-card-icons">
+            ${senses.join("")}
+          </div>
+
         </div>
       </div>
     `;
