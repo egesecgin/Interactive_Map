@@ -138,6 +138,14 @@ input[id="radio-6"] {
 	
 }
 
+input[id="radio-6"] {
+	&:checked {
+		& ~ .glider {
+			transform: translateX(500%);
+		}
+	}
+}
+
 
 
 .icon_1 {
