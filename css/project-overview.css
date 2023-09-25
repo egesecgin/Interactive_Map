@@ -195,7 +195,7 @@
 
 .gallery-image {
   width: 16vw;
-  height: 16vw;
+  height: 15vw;
   object-fit: cover;
   margin: 0.5em;
   border-radius: 22px;
