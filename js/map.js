@@ -57,7 +57,6 @@ req.onreadystatechange = () => {
       updateMarkers();
 
       document.getElementById("loading-wrapper").classList.add("loading-done");
-
     })();
   }
 };
@@ -159,13 +158,13 @@ function filterProjectsByYear(year) {
     filteredProjectList = ProjectList.filter((x) => x.Year.toString() === year);
   }
 
-  document.getElementById('all').classList.remove('year-button-active');
-  document.getElementById('2022').classList.remove('year-button-active');
-  document.getElementById('2021').classList.remove('year-button-active');
-  document.getElementById('2019').classList.remove('year-button-active');
-  document.getElementById('2018').classList.remove('year-button-active');
+  document.getElementById("all").classList.remove("year-button-active");
+  document.getElementById("2022").classList.remove("year-button-active");
+  document.getElementById("2021").classList.remove("year-button-active");
+  document.getElementById("2019").classList.remove("year-button-active");
+  document.getElementById("2018").classList.remove("year-button-active");
 
-  document.getElementById(year).classList.add('year-button-active');
+  document.getElementById(year).classList.add("year-button-active");
 
   console.log(year);
 
@@ -284,12 +283,11 @@ function openOverview(id) {
 
   document.getElementById("pula-gallery").innerHTML = pula_gallery;
   document.getElementById("zurich-gallery").innerHTML = zurich_gallery;
-
 }
 
-function closeIntro(){
-  document.getElementById('dimmer').classList.remove('dimmer-active');
-  document.getElementById('întroduction-popup').style.visibility = "hidden";
+function closeIntro() {
+  document.getElementById("dimmer").classList.remove("dimmer-active");
+  document.getElementById("întroduction-popup").style.visibility = "hidden";
 }
 
 function closeDialog() {
@@ -304,7 +302,6 @@ function closeDialog() {
     dialog.classList.remove("close-dialog");
   }, 300);
 
-  
   document.getElementById("dimmer").classList.remove("dimmer-active");
   const el = document.getElementById("card-container");
   el.innerHTML = "";
@@ -379,9 +376,11 @@ function openDialog(projects, area) {
     console.log(imageUrl);
     const image = document.createElement("ul");
 
-    
-
-    image.innerHTML = `<a href="${getGoogleImageID(imageUrl)}" data-lightbox="${imageUrl}" data-title=""><img class="history-image" src="${getGoogleImageID(imageUrl)}" alt=""></a>`;
+    image.innerHTML = `<a href="${getGoogleImageID(
+      imageUrl
+    )}" data-lightbox="${imageUrl}" data-title=""><img class="history-image" src="${getGoogleImageID(
+      imageUrl
+    )}" alt=""></a>`;
     image_container.appendChild(image);
   }
 
@@ -441,10 +440,9 @@ function populateDetails(project) {
     }
   }
 
-
   for (let student of project.team) {
-        students.push(student);
-        console.log(student);
+    students.push(student);
+    console.log(student);
   }
 
   const details = `

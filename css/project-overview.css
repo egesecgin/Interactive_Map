@@ -172,7 +172,7 @@
 }
 
 .project-overview-gallery {
-  height: 120vh;
+  height: 115vh;
   width: 100vw;
   padding: 10%;
   padding-top: 30vh;
@@ -194,8 +194,8 @@
 }
 
 .gallery-image {
-  width: 25em;
-  height: 25em;
+  width: 16vw;
+  height: 16vw;
   object-fit: cover;
   margin: 0.5em;
   border-radius: 22px;
@@ -251,4 +251,3 @@
     opacity: 0;
   }
 }
-

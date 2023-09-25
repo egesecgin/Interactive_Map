@@ -1,212 +1,203 @@
 :root {
-	--primary-color: #985944;
-	--secondary-color: #E5DED8;
+  --primary-color: #985944;
+  --secondary-color: #e5ded8;
 }
 
 *,
 *:after,
 *:before {
-	box-sizing: border-box;
-	font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
 }
 
 body {
-	background-color: rgba(#e6eef9, 0.5);
+  background-color: rgba(#e6eef9, 0.5);
 }
 .container {
-	position: absolute;
-	left: 0;
-	top: 0;
-	right: 0;
-	bottom: 5em;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .tabs {
-	
-	display: flex;
-	position: relative;
-	background-color: #fff;
-	box-shadow: 0 0 1px 0 rgba(#185ee0, 0.15), 0 6px 12px 0 rgba(#185ee0, 0.15);
-	padding: 0.75rem;
-	border-radius: 99px; 
-	* {
-		z-index: 2;
-	}
+  display: flex;
+  position: relative;
+  background-color: #fff;
+  box-shadow: 0 0 1px 0 rgba(#185ee0, 0.15), 0 6px 12px 0 rgba(#185ee0, 0.15);
+  padding: 0.75rem;
+  border-radius: 99px;
+  * {
+    z-index: 2;
+  }
 }
 
 input[type="radio"] {
-	display: none;
+  display: none;
 }
 
 .tab {
-	
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 54px;
-	width: 200px;
-	font-size: 1.25rem;
-	font-weight: bold;
-	border-radius: 99px;
-	cursor: pointer;
-	transition: color 0.15s ease-in;
-	transition: transform 200ms;
-    z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 54px;
+  width: 200px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: color 0.15s ease-in;
+  transition: transform 200ms;
+  z-index: 10;
 }
 
 .tab:hover {
-	transform: translate(0px, 5px);
-	transition: transform 200ms;
+  transform: translate(0px, 5px);
+  transition: transform 200ms;
 }
 
-
 .notification {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 2rem;
-	height: 2rem;
-	margin-left: 0.75rem;
-	border-radius: 50%;
-	background-color: var(--secondary-color);
-	transition: 0.15s ease-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-left: 0.75rem;
+  border-radius: 50%;
+  background-color: var(--secondary-color);
+  transition: 0.15s ease-in;
 }
 
 input[type="radio"] {
-	&:checked {
-		& + label {
-			color: var(--primary-color);
-			& > .notification {
-				background-color: var(--primary-color);
-				color: #fff;
-			}
-		}
-	}
+  &:checked {
+    & + label {
+      color: var(--primary-color);
+      & > .notification {
+        background-color: var(--primary-color);
+        color: #fff;
+      }
+    }
+  }
 }
 
 input[id="radio-1"] {
-	&:checked {
-		& ~ .glider {
-			transform: translateX(0);
-		}
-	}
+  &:checked {
+    & ~ .glider {
+      transform: translateX(0);
+    }
+  }
 }
 
 input[id="radio-2"] {
-	&:checked {
-		& ~ .glider {
-			transform: translateX(100%);
-		}
-	}
+  &:checked {
+    & ~ .glider {
+      transform: translateX(100%);
+    }
+  }
 }
 
 input[id="radio-3"] {
-	&:checked {
-		& ~ .glider {
-			transform: translateX(200%);
-		}
-	}
+  &:checked {
+    & ~ .glider {
+      transform: translateX(200%);
+    }
+  }
 }
 
 input[id="radio-4"] {
-	&:checked {
-		& ~ .glider {
-			transform: translateX(300%);
-		}
-	}
+  &:checked {
+    & ~ .glider {
+      transform: translateX(300%);
+    }
+  }
 }
 
 input[id="radio-5"] {
-	&:checked {
-		& ~ .glider {
-			transform: translateX(400%);
-		}
-	}
-
-	
+  &:checked {
+    & ~ .glider {
+      transform: translateX(400%);
+    }
+  }
 }
 
 input[id="radio-6"] {
-	&:checked {
-		& ~ .glider {
-			transform: translateX(500%);
-		}
-	}
-
-	
+  &:checked {
+    & ~ .glider {
+      transform: translateX(500%);
+    }
+  }
 }
 
 input[id="radio-6"] {
-	&:checked {
-		& ~ .glider {
-			transform: translateX(500%);
-		}
-	}
+  &:checked {
+    & ~ .glider {
+      transform: translateX(500%);
+    }
+  }
 }
-
-
 
 .icon_1 {
-	position: relative;
-	right: 15px;
-	padding: 5px;
-	height: 35px;
-	width: 40px;	
+  position: relative;
+  right: 15px;
+  padding: 5px;
+  height: 35px;
+  width: 40px;
 }
 
 .icon_2 {
-	position: relative;
-	right: 15px;
-	padding: 5px;
-	height: 37px;
-	width: 40px;	
+  position: relative;
+  right: 15px;
+  padding: 5px;
+  height: 37px;
+  width: 40px;
 }
 
 .icon_3 {
-	position: relative;
-	right: 20px;
-	padding: 5px;
-	height: 35px;
-	width: 40px;	
+  position: relative;
+  right: 20px;
+  padding: 5px;
+  height: 35px;
+  width: 40px;
 }
 
 .icon_4 {
-	position: relative;
-	right: 5px;
-	padding: 5px;
-	height: 35px;
-	width: 40px;	
+  position: relative;
+  right: 5px;
+  padding: 5px;
+  height: 35px;
+  width: 40px;
 }
 
 .icon_5 {
-	position: relative;
-	padding: 5px;
-	height: 35px;
-	width: 40px;	
+  position: relative;
+  padding: 5px;
+  height: 35px;
+  width: 40px;
 }
 
 .icon_6 {
-	position: relative;
-	padding: 5px;
-	height: 35px;
-	width: 40px;	
+  position: relative;
+  padding: 5px;
+  height: 35px;
+  width: 40px;
 }
 
 .glider {
-	position: absolute;
-	display: flex;
-	height: 54px;
-	width: 200px;
-	background-color: var(--secondary-color);
-	z-index: 0;
-	border-radius: 99px; 
-	transition: 0.25s ease-out;
+  position: absolute;
+  display: flex;
+  height: 54px;
+  width: 200px;
+  background-color: var(--secondary-color);
+  z-index: 0;
+  border-radius: 99px;
+  transition: 0.25s ease-out;
 }
 
 @media (max-width: 700px) {
-	.tabs {
-		transform: scale(0.6);
-	}
+  .tabs {
+    transform: scale(0.6);
+  }
 }
