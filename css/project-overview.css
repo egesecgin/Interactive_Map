@@ -1,250 +1,254 @@
 .project-overview {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #ECE8E5;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    visibility: hidden;
-    opacity: 0;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ece8e5;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 3;
 }
 
 .project-overview-opened {
-    visibility: visible;
-    animation: appear 500ms;
-    animation-fill-mode: forwards;
+  visibility: visible;
+  animation: appear ease-in 800ms;
+  animation-fill-mode: forwards;
 }
 
 .project-overview-image-container {
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
-    height: 70vh;
-    margin: 0 auto 0 auto;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  height: 70vh;
+  margin: 0 auto 0 auto;
 }
 
 .project-overview-pula {
-    position: relative;
-    left: 0;
-    flex: 1;
-    height: 100%;
-    border-radius: 50px;
-    margin-right: 1em;
-    transition: flex-grow 300ms;
-    cursor: pointer;
-    background-color: #dddddd;
-    z-index: 9999;
-    -webkit-box-shadow: 4px 5px 18px -4px rgba(0,0,0,0.22); 
-    box-shadow: 4px 5px 18px -4px rgba(0,0,0,0.22);
-    transition: all 200ms;
+  position: relative;
+  left: 0;
+  flex: 1;
+  height: 100%;
+  border-radius: 50px;
+  margin-right: 1em;
+  transition: flex-grow 300ms;
+  cursor: pointer;
+  background-color: #dddddd;
+  z-index: 9999;
+  -webkit-box-shadow: 4px 5px 18px -4px rgba(0, 0, 0, 0.22);
+  box-shadow: 4px 5px 18px -4px rgba(0, 0, 0, 0.22);
+  transition: all 200ms;
 }
 
 .project-overview-zurich {
-    position: relative;
-    right: 0;
-    flex: 1;
-    height: 100%;
-    border-radius: 50px;
-    margin-left: 1em;
-    transition: all 300ms;
-    cursor: pointer;
-    background-color: #dddddd;
-    z-index: 9999;
-    -webkit-box-shadow: 4px 5px 18px -4px rgba(0,0,0,0.22); 
-    box-shadow: 4px 5px 18px -4px rgba(0,0,0,0.22);
-    transition: all 200ms;
+  position: relative;
+  right: 0;
+  flex: 1;
+  height: 100%;
+  border-radius: 50px;
+  margin-left: 1em;
+  transition: all 300ms;
+  cursor: pointer;
+  background-color: #dddddd;
+  z-index: 9999;
+  -webkit-box-shadow: 4px 5px 18px -4px rgba(0, 0, 0, 0.22);
+  box-shadow: 4px 5px 18px -4px rgba(0, 0, 0, 0.22);
+  transition: all 200ms;
 }
 
 #project-overview-pula:hover {
-    transition: all ease-in-out 300ms;
-    transform: scale(1.01);
+  transition: all ease-in-out 300ms;
+  transform: scale(1.01);
 }
 
 #project-overview-zurich:hover {
-    transition: all ease-in-out 300ms;
-    transform: scale(1.01);
+  transition: all ease-in-out 300ms;
+  transform: scale(1.01);
 }
 
 .project-overview-image {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    transition: all 300ms;
-    border-radius: 50px;
-    position: relative;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  transition: all 300ms;
+  border-radius: 50px;
+  position: relative;
 }
 
 .project-overview-description {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    position: absolute;
-    color: white;
-    padding: 4em;
-    bottom: 0;
-    transition: all 300ms;
-    font-size: 24px;
-    opacity: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: absolute;
+  color: white;
+  padding: 4em;
+  bottom: 0;
+  transition: all 300ms;
+  font-size: 24px;
+  opacity: 0;
 }
 
 .project-overview-description-active {
-    transition: all 300ms;
-    opacity: 1;
+  transition: all 300ms;
+  opacity: 1;
 }
 
 .project-overview-active {
-    transition: all 300ms;
-    flex-grow: 2.5;
+  transition: all 300ms;
+  flex-grow: 2.5;
 }
 
 .project-overview-image-active {
-    transition: all 500ms;
-    filter: saturate(0.4);
-    filter: blur(5px);
-    filter: brightness(0.4)
+  transition: all 500ms;
+  filter: saturate(0.4);
+  filter: blur(5px);
+  filter: brightness(0.4);
 }
 
 #project-overview-description-pula {
-    text-align: right;
+  text-align: right;
 }
 
 #project-overview-description-zurich {
-    text-align: left;
+  text-align: left;
 }
 
 .project-overview-title-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 15vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 15vh;
 }
 
 .project-overview-title {
-    color: #985944;
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal; 
+  color: #985944;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 
 .project-overview-caption-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 10vh;
-    position: relative;
-    z-index: 1;
-    margin-top: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 10vh;
+  position: relative;
+  z-index: 1;
+  margin-top: 1.5em;
 }
 
 .project-overview-caption {
-    color: #985944;
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal; 
-    background-color: #ECE8E5;
-    padding: 1em 2em 1em 2em;
+  color: #985944;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  background-color: #ece8e5;
+  padding: 1em 2em 1em 2em;
 }
 
 .project-overview-caption-bar {
-    margin-top: 3em;
-    width: 50em;
-    height: 0.5em;
-    background-color: #985944;
-    position: relative;
-
+  margin-top: 3em;
+  width: 50em;
+  height: 0.5em;
+  background-color: #985944;
+  position: relative;
 }
 
 .project-overview-caption-bar-container {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 11vh;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 11vh;
 }
 
 .project-overview-gallery {
-    height: 120vh;
-    width: 100vw;
-    padding: 10%;
-    padding-top: 30vh;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  height: 120vh;
+  width: 100vw;
+  padding: 10%;
+  padding-top: 30vh;
+  display: flex;
+  justify-content: space-between;
 }
 
 .gallery-section {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    width: 49em;
-    justify-content: space-evenly;
-    padding: 2em;
-    background-color: #F9F2EC;
-    -webkit-box-shadow: 4px 5px 18px -1px rgba(0,0,0,0.31); 
-    box-shadow: 4px 5px 18px -1px rgba(0,0,0,0.31);
-    border-radius: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 47%;
+  justify-content: space-evenly;
+  padding: 2em;
+  background-color: #f9f2ec;
+  -webkit-box-shadow: 4px 5px 18px -1px rgba(0, 0, 0, 0.31);
+  box-shadow: 4px 5px 18px -1px rgba(0, 0, 0, 0.31);
+  border-radius: 50px;
 }
 
 .gallery-image {
-    width: 21em;
-    height: 20em;
-    object-fit: cover;
-    margin: 0.5em;
-    border-radius: 22px;
+  width: 25em;
+  height: 25em;
+  object-fit: cover;
+  margin: 0.5em;
+  border-radius: 22px;
+  transition: transform ease-in 200ms;
+}
+
+.gallery-image:hover {
+  transition: transform ease-in 200ms;
+  transform: translate(10px, 0);
 }
 
 .overview-close {
-    position: fixed;    
-    margin-top: 4em;
-    margin-left: 4em;
-    transition: all 300ms;
-    cursor: pointer;
+  position: fixed;
+  margin-top: 4em;
+  margin-left: 4em;
+  transition: all 300ms;
+  cursor: pointer;
 }
 
 .overview-close:hover {
-    transform: translate(-15px, 0px);
-    transition: all 300ms;
+  transform: translate(-15px, 0px);
+  transition: all 300ms;
 }
 
 .loading-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
 }
 
 .close-project-overview {
-    animation: vanish2 200ms;
+  animation: vanish2 200ms;
 }
 
 @keyframes appear {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+  0% {
+    opacity: 0;
   }
+  100% {
+    opacity: 1;
+  }
+}
 
 @keyframes vanish2 {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
+  0% {
+    opacity: 1;
   }
+  100% {
+    opacity: 0;
+  }
+}
 
