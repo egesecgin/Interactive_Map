@@ -48,12 +48,19 @@ input[type="radio"] {
 	height: 54px;
 	width: 200px;
 	font-size: 1.25rem;
-	font-weight: 500;
+	font-weight: bold;
 	border-radius: 99px;
 	cursor: pointer;
 	transition: color 0.15s ease-in;
+	transition: transform 200ms;
     z-index: 10;
 }
+
+.tab:hover {
+	transform: translate(0px, 5px);
+	transition: transform 200ms;
+}
+
 
 .notification {
 	display: flex;
@@ -117,7 +124,20 @@ input[id="radio-5"] {
 			transform: translateX(400%);
 		}
 	}
+
+	
 }
+
+input[id="radio-6"] {
+	&:checked {
+		& ~ .glider {
+			transform: translateX(500%);
+		}
+	}
+
+	
+}
+
 
 
 .icon_1 {
@@ -153,6 +173,13 @@ input[id="radio-5"] {
 }
 
 .icon_5 {
+	position: relative;
+	padding: 5px;
+	height: 35px;
+	width: 40px;	
+}
+
+.icon_6 {
 	position: relative;
 	padding: 5px;
 	height: 35px;

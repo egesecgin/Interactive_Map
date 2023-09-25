@@ -57,11 +57,12 @@ req.onreadystatechange = () => {
       updateMarkers();
 
       document.getElementById("loading-wrapper").classList.add("loading-done");
+
     })();
   }
 };
 
-req.open("GET", "https://api.jsonbin.io/v3/b/650ee18912a5d376598211d3", true);
+req.open("GET", "https://api.jsonbin.io/v3/b/651206fe0574da7622b04cbc", true);
 req.setRequestHeader(
   "X-Master-Key",
   "$2a$10$Tw5DZmmLnLrkxrfVWRwguucmIGDPN7Mo4FZAImYzSUZvyR8mH9x4u"
@@ -152,11 +153,22 @@ function filterProjectsByYear(year) {
     }
   }
 
-  if (year === "reset") {
+  if (year === "all") {
     filteredProjectList = ProjectList;
   } else {
-    filteredProjectList = ProjectList.filter((x) => x.Year == year);
+    filteredProjectList = ProjectList.filter((x) => x.Year.toString() === year);
   }
+
+  document.getElementById('all').classList.remove('year-button-active');
+  document.getElementById('2022').classList.remove('year-button-active');
+  document.getElementById('2021').classList.remove('year-button-active');
+  document.getElementById('2019').classList.remove('year-button-active');
+  document.getElementById('2018').classList.remove('year-button-active');
+
+  document.getElementById(year).classList.add('year-button-active');
+
+  console.log(year);
+
   locationList = updateLocationList();
   updateMarkers();
 }
@@ -256,15 +268,28 @@ function openOverview(id) {
   document.getElementById("project-overview-description-zurich").innerHTML =
     project.translation;
 
-  document.getElementById("gallery-1").src = project.pula_gallery1;
-  document.getElementById("gallery-2").src = project.pula_gallery2;
-  document.getElementById("gallery-3").src = project.pula_gallery3;
-  document.getElementById("gallery-4").src = project.pula_gallery4;
+  const pula_gallery = `
+    <a href="${project.pula_gallery1}" data-lightbox="${project.pula_gallery1}" data-title=""><img class="gallery-image" src="${project.pula_gallery1}" alt=""></a>
+    <a href="${project.pula_gallery2}" data-lightbox="${project.pula_gallery2}" data-title=""><img class="gallery-image" src="${project.pula_gallery2}" alt=""></a>
+    <a href="${project.pula_gallery3}" data-lightbox="${project.pula_gallery3}" data-title=""><img class="gallery-image" src="${project.pula_gallery3}" alt=""></a>
+    <a href="${project.pula_gallery4}" data-lightbox="${project.pula_gallery4}" data-title=""><img class="gallery-image" src="${project.pula_gallery4}" alt=""></a>
+  `;
 
-  document.getElementById("gallery-5").src = project.toni_gallery1;
-  document.getElementById("gallery-6").src = project.toni_gallery2;
-  document.getElementById("gallery-7").src = project.toni_gallery3;
-  document.getElementById("gallery-8").src = project.toni_gallery4;
+  const zurich_gallery = `
+  <a href="${project.toni_gallery1}" data-lightbox="${project.toni_gallery1}" data-title=""><img class="gallery-image" src="${project.toni_gallery1}" alt=""></a>
+  <a href="${project.toni_gallery2}" data-lightbox="${project.toni_gallery2}" data-title=""><img class="gallery-image" src="${project.toni_gallery2}" alt=""></a>
+  <a href="${project.toni_gallery3}" data-lightbox="${project.toni_gallery3}" data-title=""><img class="gallery-image" src="${project.toni_gallery3}" alt=""></a>
+  <a href="${project.toni_gallery4}" data-lightbox="${project.toni_gallery4}" data-title=""><img class="gallery-image" src="${project.toni_gallery4}" alt=""></a>
+`;
+
+  document.getElementById("pula-gallery").innerHTML = pula_gallery;
+  document.getElementById("zurich-gallery").innerHTML = zurich_gallery;
+
+}
+
+function closeIntro(){
+  document.getElementById('dimmer').classList.remove('dimmer-active');
+  document.getElementById('întroduction-popup').style.visibility = "hidden";
 }
 
 function closeDialog() {
@@ -275,9 +300,11 @@ function closeDialog() {
 
   setTimeout(function () {
     dialog.classList.remove("open-dialog");
+    document.getElementById("popup-close").classList.remove("visible");
     dialog.classList.remove("close-dialog");
   }, 300);
 
+  
   document.getElementById("dimmer").classList.remove("dimmer-active");
   const el = document.getElementById("card-container");
   el.innerHTML = "";
@@ -326,13 +353,14 @@ function openDialog(projects, area) {
 
   let dialog = document.getElementById("overview-dialog");
   let video_player = document.getElementById("video-player");
+
   video_player.classList.remove("stop-video");
   video_player.innerHTML = `<iframe class="area-video" src="${area.properties.areavideo}?autoplay=1&nocontrols=1" frameborder="0" allow="autoplay"></iframe>`;
 
   setTimeout(function () {
     document.getElementById("dimmer").classList.add("dimmer-active");
     dialog.classList.add("open-dialog");
-  }, 700);
+  }, 800);
 
   map.flyTo({
     center: [area.geometry.coordinates[0], area.geometry.coordinates[1]],
@@ -351,11 +379,9 @@ function openDialog(projects, area) {
     console.log(imageUrl);
     const image = document.createElement("ul");
 
-    image.innerHTML = `<a data-fslightbox href="${getGoogleImageID(
-      imageUrl
-    )}"><img class="history-image" src="${getGoogleImageID(
-      imageUrl
-    )}" alt=""></a>`;
+    
+
+    image.innerHTML = `<a href="${getGoogleImageID(imageUrl)}" data-lightbox="${imageUrl}" data-title=""><img class="history-image" src="${getGoogleImageID(imageUrl)}" alt=""></a>`;
     image_container.appendChild(image);
   }
 
@@ -372,25 +398,53 @@ function openDialog(projects, area) {
     console.log(dialogOpen);
     if (dialogOpen === true) {
       document.getElementById("video-player").classList.add("stop-video");
+      document.getElementById("popup-close").classList.add("visible");
     }
   }, 4000);
 }
 
 function populateDetails(project) {
   const senses = [];
+  const students = [];
 
   for (let sense of project.senses) {
     switch (sense) {
       case "Visual": {
-        senses.push(`<img class="sense-icon" src="./assets/visual.svg">`);
+        senses.push(`<img class="sense-icon" src="./assets/visual.png">`);
+        break;
       }
       case "Auditive": {
-        senses.push(`<img class="sense-icon" src="./assets/auditive.svg">`);
+        senses.push(`<img class="sense-icon" src="./assets/auditive.png">`);
+        break;
       }
       case "Touch": {
-        senses.push(`<img class="sense-icon" src="./assets/haptic.svg">`);
+        senses.push(`<img class="sense-icon" src="./assets/haptic.png">`);
+        break;
       }
     }
+  }
+
+  for (let type of project.type) {
+    switch (type) {
+      case "Performance": {
+        senses.push(`<img class="sense-icon" src="./assets/installation.png">`);
+        break;
+      }
+      case "Interactive": {
+        senses.push(`<img class="sense-icon" src="./assets/performance.png">`);
+        break;
+      }
+      case "Installation": {
+        senses.push(`<img class="sense-icon" src="./assets/performance.png">`);
+        break;
+      }
+    }
+  }
+
+
+  for (let student of project.team) {
+        students.push(student);
+        console.log(student);
   }
 
   const details = `
@@ -400,16 +454,33 @@ function populateDetails(project) {
           <div class="card-title">${project.name}</div>
         </div>
 
+
+
+
         <div class="project-card-image-container">
           <img class="project-card-image" src="${getGoogleImageID(
             project.img_pula
           )}" alt="">
 
+
+          <div class="project-card-footer">
+
           <div class="project-card-icons">
-            ${senses.join("")}
+              ${senses.join("")}
+            </div>   
+
+            <div class="project-card-students">
+            ${students.join(", ")}
+            </div>
+
           </div>
 
+
         </div>
+
+        <div class="project-card-footer-backdrop">
+        </div>
+
       </div>
     `;
   return details;

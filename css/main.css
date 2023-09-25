@@ -59,7 +59,7 @@ body {
   top: 50%;  /* Position at center vertically */
   transform: translateY(-50%);  /* Shift up by half of its own height to truly center */
   width: 200px;
-  height: 60vh;
+  height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -75,94 +75,38 @@ body {
   justify-content: center;
   align-items: center;
 }
-.year-btn-all {
-  position: relative;
+
+.year-button {
+  position: absolute;
   top: -15px;
-  width: 40px;
-  height: 40px;
+  width: 5em;
+  height: 5em;
   border-radius: 50%;
   border: none;
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  font-size: 1em;
+  font-weight: bold;
+  box-shadow: 0px 0px 10px  rgba(0, 0, 0, 1);
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+.year-button-active {
   background: #E5DED8;
   color: #985944;
-  font-size: 105%;
+  outline: solid  7px white;
 }
 
-.year-btn-all::after {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: #ffffff;
-  z-index: -1;
-  box-shadow: 0px 0px 10px  rgba(0, 0, 0, 1);
+.year-button:hover {
+  transform: scale(1.1);
+  transition: all 200ms;
 }
 
-.year-btn-2022 {
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: none;
-  background: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  font-size: 105%;
-  box-shadow: 0px 0px 10px  rgba(0, 0, 0, 1);
-}
-
-.year-btn-2021 {
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: none;
-  background: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  font-size: 105%;
-  box-shadow: 0px 0px 10px  rgba(0, 0, 0, 1);
-}
-
-.year-btn-2019 {
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: none;
-  background: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  font-size: 105%;
-  box-shadow: 0px 0px 10px  rgba(0, 0, 0, 1);
-}
-
-.year-btn-2018 {
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: none;
-  background: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  font-size: 105%;
-  box-shadow: 0px 0px 10px  rgba(0, 0, 0, 1);
-}
 
 .line {
   position: absolute;
-  top: 15%; 
+  top: 20%; 
   bottom: 20%; 
   left: 50%;
   border-left: 3px solid rgb(255, 255, 255); 
@@ -240,6 +184,19 @@ body {
   -webkit-animation: fadeOut 500ms;
   -moz-animation: fadeOut 500ms;
   animation: fadeOut 200ms;
+}
+
+.introduction-popup {
+  background-color: #f9f2ec;
+  position: absolute;
+  width: 75vw;
+  height: 90vh;
+  display: flex;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  border-radius: 50px;
+  overflow: hidden;
+  background: #EFE3D5;
 }
 
 @keyframes slide-up {

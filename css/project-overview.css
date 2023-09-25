@@ -9,11 +9,12 @@
   overflow-x: hidden;
   visibility: hidden;
   opacity: 0;
+  z-index: 3;
 }
 
 .project-overview-opened {
   visibility: visible;
-  animation: appear 500ms;
+  animation: appear ease-in 800ms;
   animation-fill-mode: forwards;
 }
 
@@ -176,8 +177,6 @@
   padding: 10%;
   padding-top: 30vh;
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
   justify-content: space-between;
 }
 
@@ -185,7 +184,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  width: 46em;
+  width: 47%;
   justify-content: space-evenly;
   padding: 2em;
   background-color: #f9f2ec;
@@ -195,11 +194,17 @@
 }
 
 .gallery-image {
-  width: 21em;
-  height: 20em;
+  width: 25em;
+  height: 25em;
   object-fit: cover;
   margin: 0.5em;
   border-radius: 22px;
+  transition: transform ease-in 200ms;
+}
+
+.gallery-image:hover {
+  transition: transform ease-in 200ms;
+  transform: translate(10px, 0);
 }
 
 .overview-close {

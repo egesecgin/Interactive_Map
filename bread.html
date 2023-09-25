@@ -26,6 +26,7 @@
     <link href="./css/tabs.css" rel="stylesheet" />
     <link href="./css/popup.css" rel="stylesheet" />
     <link href="./css/project-overview.css" rel="stylesheet" />
+    <link href="./css/lightbox.css" rel="stylesheet" />
 
     <style>
       body {
@@ -58,31 +59,57 @@
 
     <div id="map"></div>
 
+<!--     <div id="introduction-popup" class="popup-container-2">
+      <div class="introduction-popup">
+        <div class="introduction-title">
+          Introduction
+        </div>
+        <div class="introduction-body">
+          Welcome to the world of ZHdK students' exploration in Pula, Croatia. They ventured to this historical and architectural haven, immersing themselves in its rich heritage. Inspired by their experiences, 
+          the students created projects in Pula that were later recreated and translated in Zurich. 
+          Discover their innovative work on this interactive map, where the past and present converge in a harmonious blend of cultural exchange. 
+          Join us on this virtual journey of exploration and creativity.
+        </div>
+        <div class="introduction-footer">
+          Explore the projects
+
+          <img
+              onclick="closeIntro()"
+              class="introduction-close"
+              src="./assets/continue.svg"
+              alt="close introduction icon"
+          />
+        </div>
+
+      </div>
+    </div> -->
+
+
     <div class="category-container">
       <div class="timeline">
         <div class="line"></div>
-        <div class="year">
-          <button onclick="filterProjectsByYear('reset')" class="year-btn-all">
+        <div class="year">          
+          <button id="all" onclick="filterProjectsByYear('all')" class="year-button year-button-active">
             All
           </button>
         </div>
         <div class="year">
-          <button onclick="filterProjectsByYear(2022)" class="year-btn-2022">
+          <button id="2022" onclick="filterProjectsByYear('2022')" class="year-button">
             2022
           </button>
         </div>
         <div class="year">
-          <button onclick="filterProjectsByYear(2021)" class="year-btn-2021">
+          <button id="2021" onclick="filterProjectsByYear('2021')" class="year-button">
             2021
           </button>
         </div>
         <div class="year">
-          <button onclick="filterProjectsByYear(2019)" class="year-btn-2019">
+          <button id="2019" onclick="filterProjectsByYear('2019')" class="year-button">
             2019
           </button>
         </div>
         <div class="year">
-          <button onclick="filterProjectsByYear(2018)" class="year-btn-2018">
+          <button id="2018" onclick="filterProjectsByYear('2018')" class="year-button">
             2018
           </button>
         </div>
@@ -98,7 +125,7 @@
             checked
           />
           <label class="tab" for="radio-1"
-            ><img class="icon_1" src="./assets/icon_all.png" />All
+            ><img class="icon_1" src="./assets/icons/icon_all.png" />All
             filters</label
           >
 
@@ -109,7 +136,7 @@
             name="tabs"
           />
           <label class="tab" for="radio-2"
-            ><img class="icon_2" src="./assets/icon_haptic.png" />Haptic</label
+            ><img class="icon_2" src="./assets/icons/icon_haptic.png" />Haptic</label
           >
 
           <input
@@ -119,24 +146,21 @@
             name="tabs"
           />
           <label class="tab" for="radio-3"
-            ><img class="icon_3" src="./assets/icon_visual.png" />Visual</label
+            ><img class="icon_3" src="./assets/icons/icon_visual.png" />Visual</label
           >
+
+          <input
+          onclick="filterProjectsBySense('Auditive')"
+          type="radio"
+          id="radio-4"
+          name="tabs"
+        />
+        <label class="tab" for="radio-4"
+          ><img class="icon_4" src="./assets/icons/icon_auditive.png" />Auditive</label
+        >
 
           <input
             onclick="filterProjects('Installation')"
-            type="radio"
-            id="radio-4"
-            name="tabs"
-          />
-          <label class="tab" for="radio-4"
-            ><img
-              class="icon_4"
-              src="./assets/icon_interactive.png"
-            />Installation</label
-          >
-
-          <input
-            onclick="filterProjects('Performance')"
             type="radio"
             id="radio-5"
             name="tabs"
@@ -144,7 +168,20 @@
           <label class="tab" for="radio-5"
             ><img
               class="icon_5"
-              src="./assets/icon_performance.png"
+              src="./assets/icons/icon_installation.png"
+            />Installation</label
+          >
+
+          <input
+            onclick="filterProjects('Performance')"
+            type="radio"
+            id="radio-6"
+            name="tabs"
+          />
+          <label class="tab" for="radio-6"
+            ><img
+              class="icon_6"
+              src="./assets/icons/icon_performance.png"
             />Performance</label
           >
 
@@ -159,7 +196,7 @@
       <div class="popup">
         <div id="video-player"></div>
 
-        <img
+        <img id="popup-close"
           onclick="closeDialog()"
           class="popup-close"
           src="./assets/close.svg"
@@ -273,22 +310,17 @@
       </div>
 
       <div class="project-overview-gallery">
-        <div class="gallery-section">
-          <img id="gallery-1" class="gallery-image" src="" alt="" />
-          <img id="gallery-2" class="gallery-image" src="" alt="" />
-          <img id="gallery-3" class="gallery-image" src="" alt="" />
-          <img id="gallery-4" class="gallery-image" src="" alt="" />
+        
+        <div id="pula-gallery" class="gallery-section">
         </div>
 
-        <div class="gallery-section">
-          <img id="gallery-5" class="gallery-image" src="" alt="" />
-          <img id="gallery-6" class="gallery-image" src="" alt="" />
-          <img id="gallery-7" class="gallery-image" src="" alt="" />
-          <img id="gallery-8" class="gallery-image" src="" alt="" />
+        <div id="zurich-gallery" class="gallery-section">
         </div>
+
       </div>
     </div>
   </body>
-  <script type="text/javascript" src="./js/fslightbox.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="./js/lightbox.js"></script>
   <script src="./js/map.js"></script>
 </html>
