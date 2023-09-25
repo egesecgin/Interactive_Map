@@ -172,6 +172,7 @@
 }
 
 .project-overview-gallery {
+    position: relative;
     height: 120vh;
     width: 100vw;
     padding: 10%;
@@ -183,7 +184,8 @@
 }
 
 .gallery-section {
-    display: flex;
+    position: relative;
+    display: block;
     flex-wrap: wrap;
     flex-direction: row;
     width: 49em;
