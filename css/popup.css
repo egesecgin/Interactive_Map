@@ -1,289 +1,283 @@
- * {
-    /* font-family: Merriweather, serif; */
+* {
+  /* font-family: Merriweather, serif; */
 }
 
 .popup-close {
-    margin: 20px;
-    width: 35px;
-    height: 35px;
-    
+  margin: 20px;
+  width: 35px;
+  height: 35px;
 }
 
 .dimmer {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.185);
-    visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.185);
+  visibility: hidden;
 }
 
 .dimmer-active {
-    visibility: visible;
-    animation: dim 500ms;
-    -webkit-animation-fill-mode:forwards; animation-fill-mode:forwards;
+  visibility: visible;
+  animation: dim 500ms;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
 }
 
 .popup-container {
-    visibility: hidden;
-    position: absolute;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
-
 .open-dialog {
-    visibility: visible;
-    animation: appear 500ms;
+  visibility: visible;
+  animation: appear 500ms;
 }
 
 .popup {
-    background-color: #F9F2EC;
-    position: absolute;
-    width: 90em;
-    height: 90vh;
-    display: flex;
-    -webkit-justify-content: space-around;
-    justify-content: space-around;
+  background-color: #f9f2ec;
+  position: absolute;
+  width: 85vw;
+  height: 90vh;
+  display: flex;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
 
-
-    border-radius: 50px;
-    overflow: hidden;
+  border-radius: 50px;
+  overflow: hidden;
 }
 
 .popup-content-left {
-    height: 100%;
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    margin: 0em 1.5em 3em 1.5em;
+  height: 100%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin: 0em 1.5em 3em 1.5em;
 }
 
 .popup-title-container {
-    margin-top: 2.5em;
-    height: 2em;
-    margin-bottom: 2em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.4em;
+  margin-top: 2.5em;
+  height: 2em;
+  margin-bottom: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4em;
 }
 
 .popup-title {
-    color: #985944;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: 80%;
-    gap: 0.4em;
-    font-size: 30px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    font-family: 'Montserrat', sans-serif;
+  color: #985944;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 80%;
+  gap: 0.4em;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  font-family: "Montserrat", sans-serif;
 }
 
 .card-title {
-    color: #985944;
-    
-    font-size: 26px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    font-family: 'Montserrat', sans-serif;
-    /* margin-bottom: 1em; */
+  color: #985944;
+
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  font-family: "Montserrat", sans-serif;
+  /* margin-bottom: 1em; */
 }
 
 .popup-content-left-bottom {
-    height: 100%;
-    width: 100%;
-    margin-bottom: 1.5em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+  height: 100%;
+  width: 100%;
+  margin-bottom: 1.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .popup-content-left-text {
-    height: auto;
-    width: 52%;
-    font-family: Merriweather, serif;
+  height: auto;
+  width: 52%;
+  font-family: Merriweather, serif;
 }
 
 .popup-content-left-images {
-    height: 100%;
-    width: 44%;
+  height: 100%;
+  width: 44%;
 }
 
 .popup-content-right {
-    height: 100%;
-    background-color: #D9DBD5;
-    width: 45%;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
+  height: 100%;
+  background-color: #d9dbd5;
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
 }
 
-
-
 .popup-body {
-    color: #5A5757;
-    text-align: justify;
-    font-family: Merriweather;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 25px; /* 138.889% */
+  color: #5a5757;
+  text-align: justify;
+  font-family: Merriweather;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 25px; /* 138.889% */
 }
 
 .history-image {
-    object-fit: cover;
-    width: 95%;
-    margin-left: 5%;
-    border-radius: 32px;
-    max-height: 33%;
-    margin-bottom: 1em;
+  object-fit: cover;
+  width: 95%;
+  margin-left: 5%;
+  border-radius: 32px;
+  max-height: 33%;
+  margin-bottom: 1em;
 }
 
-
-
 .popup-title-image {
-    width: 3em;
+  width: 3em;
 }
 
 .close-dialog {
-    animation: vanish ease-in 100ms;
-    animation-fill-mode: forwards;
+  animation: vanish ease-in 100ms;
+  animation-fill-mode: forwards;
 }
 
 .popup-close {
-    width: 2em;
-    height: 2em;
-    position: absolute;
-    top: 1em;
-    left: 1em;
-    transition: transform 200ms;
+  width: 2em;
+  height: 2em;
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  transition: transform 200ms;
 }
 
 .popup-close:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-    transition: transform 200ms;
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: transform 200ms;
 }
 
 #card-container {
-    margin-bottom: 1.5em;
-    margin-left: 2em;
-    width: 95%;
-    overflow-y: scroll;
-    padding-right: 5%;
+  margin-bottom: 1.5em;
+  margin-left: 2em;
+  width: 95%;
+  overflow-y: scroll;
+  padding-right: 5%;
 }
 
 .project-card {
-    width: 95%;
-    margin-left: 1em;
-    border-radius: 32px;
-    height: 30em;
-    background-color: #F9F2EC;
-    overflow: hidden;
-    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
-    margin-bottom: 2em;
-    transition: all ease-in-out 200ms;
-    cursor: pointer;
+  width: 95%;
+  margin-left: 1em;
+  border-radius: 32px;
+  height: 30em;
+  background-color: #f9f2ec;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  margin-bottom: 2em;
+  transition: all ease-in-out 200ms;
+  cursor: pointer;
 }
 
 .project-card:hover {
-    transition: all ease-in-out 200ms;
-    transform: translate(8px, 0);
+  transition: all ease-in-out 200ms;
+  transform: translate(8px, 0);
 }
 
 .project-card-title {
-    display: flex;
-    align-items: center;
-    padding: 0.4em 0.3em 0em 1.5em;
-    text-align: left;
-    height: 5em;
+  display: flex;
+  align-items: center;
+  padding: 0.4em 0.3em 0em 1.5em;
+  text-align: left;
+  height: 5em;
 }
 
 .project-card-image-container {
-    height: 25em;
-    width: auto;
-    background-color: rgb(155, 126, 126);
+  height: 25em;
+  width: auto;
+  background-color: rgb(155, 126, 126);
 }
 
-.project-card-image{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.project-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 #content {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 #video-player {
 }
 
 .area-video {
-    margin-left: -20em;
-    width: 120em; 
-    height: 100%; 
-    left: 0;
-    top: 0;
-    position: absolute;
-    overflow: hidden;
+  width: 200em;
+  height: 100%;
+  left: -55em;
+  top: 0;
+  position: absolute;
 }
 
 .stop-video {
-    animation: vanish 500ms;
-    -webkit-animation-fill-mode:forwards; animation-fill-mode:forwards;
+  animation: vanish 500ms;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
 }
 
 .popup-content-visible {
-    opacity: 1;
-    visibility: visible;
-    animation: appear 500ms;
-    -webkit-animation-fill-mode:forwards; animation-fill-mode:forwards;
+  opacity: 1;
+  visibility: visible;
+  animation: appear 500ms;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
 }
 
 .sense-icon {
-    margin: 0 1em 1em 0;
+  margin: 0 1em 1em 0;
 }
 
 .project-card-icons {
-    margin-left: 1em;
-    width: 20em;
-    margin-top: -4em;
+  margin-left: 1em;
+  width: 20em;
+  margin-top: -4em;
 }
 
 @keyframes dim {
-    0% {
-      opacity: 0;
-      backdrop-filter: blur(0px);
-    }
-    100% {
-      opacity: 1;
-      backdrop-filter: blur(3px);
-    }
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
   }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(3px);
+  }
+}
 
-  @keyframes appear {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+@keyframes appear {
+  0% {
+    opacity: 0;
   }
+  100% {
+    opacity: 1;
+  }
+}
 
-  @keyframes vanish {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-      visibility: hidden;
-    }
+@keyframes vanish {
+  0% {
+    opacity: 1;
   }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

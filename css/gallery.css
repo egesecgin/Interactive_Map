@@ -1,0 +1,14 @@
+.swipe-overview {
+  display: none;
+  animation: swipe-down 1000ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes swipe-down {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  100% {
+    transform: translate(0px, 100vh);
+  }
+}
